@@ -5,412 +5,307 @@
     <meta charset="UTF-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Owais – Personal Portfolio</title>
-
-    <!--
-      - favicon
-    -->
+    
+    <title>Muhammad Owais Mushtaq | Full-Stack Developer & Software Project Manager</title>
+    <meta name="author" content="Muhammad Owais Mushtaq">
+    <meta name="description" content="Portfolio of Muhammad Owais Mushtaq, a full-stack software engineer and software project manager skilled in Spring Boot, Angular, CI/CD, and Agile project delivery.">
+    <meta name="keywords" content="Muhammad Owais Mushtaq, software engineer, full-stack developer, Spring Boot, Angular, Agile project manager, CI/CD, GitHub Actions, Docker, SaaS, software project management, FAST NUCES, National University of Computer and Emerging Sciences">
+    
     <link href="favicon.svg" rel="shortcut icon" type="image/svg+xml">
-
-    <!--
-      - custom css link
-    -->
     <link href="./assets/css/style.css" rel="stylesheet">
-
-    <!--
-      - google font link
-    -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
-    <link
-            href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@400;700&family=Saira+Stencil+One&display=swap"
-            rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@400;700&family=Saira+Stencil+One&display=swap" rel="stylesheet">
+    
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Person",
+          "name": "Muhammad Owais Mushtaq",
+          "url": "https://muhammadowaismushtaq.github.io",
+          "sameAs": [
+            "https://www.linkedin.com/in/muhammadowaismushtaq/",
+            "https://github.com/muhammadowaismushtaq"
+            ],
+          "jobTitle": "Full-Stack Software Engineer and Project Manager",
+          "alumniOf": {
+            "@type": "CollegeOrUniversity",
+            "name": "National University of Computer and Emerging Sciences"
+          },
+            "worksFor": {
+            "@type": "Organization",
+            "name": "Matrix Systems Pvt Ltd"
+            }
+        }
+</script>
 </head>
 
 <body class="dark_theme" id="top">
 
-<!--
-  - #HEADER
--->
-
 <header class="header" data-header>
     <div class="container">
-
         <h1 class="h1 logo">
             <a href="#">Owais<span>.</span></a>
         </h1>
-
         <div class="navbar-actions">
-
             <select id="lang" name="language">
                 <option value="en">En</option>
                 <option value="ar">Ar</option>
             </select>
-
             <button aria-label="Change Theme" class="theme-btn" data-theme-btn title="Change Theme">
                 <span class="icon"></span>
             </button>
-
         </div>
-
         <button aria-label="Toggle Menu" class="nav-toggle-btn" data-nav-toggle-btn title="Toggle Menu">
             <span class="one"></span>
             <span class="two"></span>
             <span class="three"></span>
         </button>
-
         <nav class="navbar" data-navbar>
             <ul class="navbar-list">
-
                 <li>
                     <a class="navbar-link" href="#home">Home.</a>
                 </li>
-
                 <li>
                     <a class="navbar-link" href="#about">About.</a>
                 </li>
-
                 <li>
                     <a class="navbar-link" href="#skills">Skills.</a>
                 </li>
-
                 <li>
                     <a class="navbar-link" href="#portfolio">Portfolio.</a>
                 </li>
-
                 <li>
                     <a class="navbar-link" href="#contact">Contact.</a>
                 </li>
-
             </ul>
         </nav>
-
     </div>
 </header>
 
-
 <main>
     <article class="container">
-
-        <!--
-          - #HERO
-        -->
-
         <section class="hero" id="home">
-
             <figure class="hero-banner">
-
                 <picture>
                     <source media="(min-width: 768px)" srcset="assets/images/hero-banner.png">
                     <source media="(min-width: 500px)" srcset="assets/images/hero-banner.png">
-                    <img alt="A man in a blue shirt with a happy expression" class="w-100"
+                    <img alt="alt="Muhammad Owais Mushtaq - Full-Stack Developer and Project Manager"" class="w-100"
                          src="assets/images/hero-banner.png">
                 </picture>
-
             </figure>
-
             <div class="hero-content">
-
-                <h2 class="h2 hero-title">I Design & Build Creative Products</h2>
-
-                <a class="btn btn-primary" href="#contact">Get in touch</a>
-
+                <h2 class="h2 hero-title">Turning Ideas into Robust, Cloud-Native Applications</h2>
+                <a class="btn btn-primary" href="#contact">Discuss a Project</a>
             </div>
-
             <ul class="hero-social-list">
-
                 <li>
                     <a class="hero-social-link" href="https://www.linkedin.com/in/muhammadowaismushtaq/">
                         <ion-icon name="logo-linkedin"></ion-icon>
-
                         <div class="tooltip">Linkedin</div>
                     </a>
                 </li>
-
                 <li>
                     <a class="hero-social-link" href="https://github.com/muhammadowaismushtaq">
                         <ion-icon name="logo-github"></ion-icon>
-
                         <div class="tooltip">GitHub</div>
                     </a>
                 </li>
-
                 <li>
                     <a class="hero-social-link" href="https://www.facebook.com/muhammadowaismushtaq/">
                         <ion-icon name="logo-facebook"></ion-icon>
-
                         <div class="tooltip">Facebook</div>
                     </a>
                 </li>
-
             </ul>
-
             <a class="scroll-down" href="#stats">Scroll</a>
-
         </section>
-
-
-        <!--
-          - #STATS
-        -->
 
         <section class="stats" id="stats">
             <ul class="stats-list">
-
                 <li>
                     <a class="stats-card" href="#">
-
                         <div class="card-icon">
                             <img alt="Badge icon" src="./assets/images/stats-card_icon-1.png">
                         </div>
-
                         <h2 class="h2 card-title">
-                            3+ <strong>Years of Experience</strong>
+                            3+ <strong>Years in Full-Stack Development</strong>
                         </h2>
-
                         <ion-icon name="chevron-forward-outline"></ion-icon>
-
                     </a>
                 </li>
-
                 <li>
                     <a class="stats-card" href="#">
-
                         <div class="card-icon">
                             <img alt="Checkmark icon" src="./assets/images/stats-card_icon-2.png">
                         </div>
-
                         <h2 class="h2 card-title">
-                            100+ <strong>Completed Projects</strong>
+                            5+ <strong>Enterprise Projects Delivered</strong>
                         </h2>
-
                         <ion-icon name="chevron-forward-outline"></ion-icon>
-
                     </a>
                 </li>
-
                 <li>
                     <a class="stats-card" href="#">
-
                         <div class="card-icon">
                             <img alt="Peoples rating icon" src="./assets/images/stats-card_icon-3.png">
                         </div>
-
                         <h2 class="h2 card-title">
-                            Agile <strong>Practitioner</strong>
+                            Agile <strong>Project Manager</strong>
                         </h2>
-
                         <ion-icon name="chevron-forward-outline"></ion-icon>
-
                     </a>
                 </li>
-
             </ul>
         </section>
 
-
-        <!--
-          - #ABOUT
-        -->
-
         <section class="about" id="about">
-
             <figure class="about-banner">
                 <img class="w-100"
-                     src="./assets/images/about-banner.png">
+                    src="./assets/images/about-banner.png"
+                    alt="Muhammad Owais Mushtaq - Full-Stack Developer and Project Manager">
             </figure>
-
             <div class="about-content section-content">
-
                 <p class="section-subtitle">About me</p>
-
-                <h2 class="h3 section-title">Need a Scalable Product? I Can Help You Build It!</h2>
-
+                <h2 class="h3 section-title">Looking for Scalable, Production-Ready Software? I Build That.</h2>
                 <p class="section-text">
-                    Hi! I’m Muhammad Owais Mushtaq — a full-stack software engineer with ~3 years of experience building
-                    SaaS products in Agile teams. I design scalable architectures, develop robust APIs and frontends,
-                    and automate CI/CD pipelines for cloud-native deployments.
-                    From modernizing legacy systems to delivering multi-tenant platforms, I turn ideas into reliable,
-                    production-ready solutions.
+                    Hi! I’m <a href="#">Muhammad Owais Mushtaq</a> — a full-stack software engineer and project manager with ~3 years of experience delivering high-impact software solutions across SaaS platforms,
+                    enterprise tools, cloud integrations, and legacy system modernization. I design clean architectures, build APIs and dynamic frontends, lead Agile teams, and automate CI/CD workflows that scale. 
+                    Whether it's launching new products or improving existing systems, I turn complex challenges into production-ready results.
                 </p>
-
                 <div class="btn-group">
-                    <a href="#contact" class="btn btn-secondary">Hire me</a>
+                    <a href="#contact" class="btn btn-secondary">Let’s Connect</a>
                     <a href="assets/resume/Resume%20-%20Muhammad%20Owais%20Mushtaq.pdf" class="btn btn-primary" download>Download CV</a>
                 </div>
-
             </div>
-
         </section>
 
-
-        <!--
-          - #SKILLS
-        -->
-
         <section class="skills" id="skills">
-
             <div class="skills-content section-content">
-
                 <p class="section-subtitle">My skills</p>
-
                 <h2 class="h3 section-title">What My Programming Skills Included?</h2>
-
                 <p class="section-text">
                     I build clean, intuitive, and responsive full-stack applications that help users and teams get
                     things done efficiently.
                     My work spans frontend and backend development, API design, automation, and cloud-native deployments
                     — all driven by Agile practices.
                 </p>
-
                 <div class="skills-toggle" data-toggle-box>
                     <button class="toggle-btn active" data-toggle-btn>Tech</button>
-
                     <button class="toggle-btn" data-toggle-btn>Tools</button>
                 </div>
-
             </div>
-
             <div class="skills-box" data-skills-box>
-
                 <ul class="skills-list">
-
                     <li>
                         <div class="skill-card">
                             <div class="tooltip">Html</div>
-
                             <div class="card-icon">
                                 <img alt="html logo" height="48" src="https://skillicons.dev/icons?i=html" width="48"/>
                             </div>
                         </div>
                     </li>
-
                     <li>
                         <div class="skill-card">
                             <div class="tooltip">CSS</div>
-
                             <div class="card-icon">
                                 <img alt="css logo" height="48" src="https://skillicons.dev/icons?i=css" width="48"/>
                             </div>
                         </div>
                     </li>
-
                     <li>
                         <div class="skill-card">
                             <div class="tooltip">TypeScript</div>
-
                             <div class="card-icon">
                                 <img alt="typescript logo" height="65"
                                      src="https://techstack-generator.vercel.app/ts-icon.svg" width="65"/>
                             </div>
                         </div>
                     </li>
-
                     <li>
                         <div class="skill-card">
                             <div class="tooltip">Angular</div>
-
                             <div class="card-icon">
                                 <img alt="angular logo" src="./assets/images/angular.png">
                             </div>
                         </div>
                     </li>
-
                     <li>
                         <div class="skill-card">
                             <div class="tooltip">Bootstrap</div>
-
                             <div class="card-icon">
                                 <img alt="bootstrap logo" src="./assets/images/bootstrap.png">
                             </div>
                         </div>
                     </li>
-
                     <li>
                         <div class="skill-card">
                             <div class="tooltip">Java</div>
-
                             <div class="card-icon">
                                 <img alt="java logo" height="48" src="https://techstack-generator.vercel.app/java-icon.svg"
                                      width="48"/>
                             </div>
                         </div>
                     </li>
-
                     <li>
                         <div class="skill-card">
                             <div class="tooltip">Spring Boot</div>
-
                             <div class="card-icon">
                                 <img alt="spring-boot logo" height="48" src="https://skillicons.dev/icons?i=spring"
                                      width="48"/>
                             </div>
                         </div>
                     </li>
-
                     <li>
                         <div class="skill-card">
                             <div class="tooltip">Rest APIs</div>
-
                             <div class="card-icon">
                                 <img alt="rest-api logo" height="65"
                                      src="https://techstack-generator.vercel.app/restapi-icon.svg" width="65"/>
                             </div>
                         </div>
                     </li>
-
                     <li>
                         <div class="skill-card">
                             <div class="tooltip">Swagger</div>
-
                             <div class="card-icon">
                                 <img alt="swagger logo" height="48" src="./assets/images/swagger.png" width="48">
                             </div>
                         </div>
                     </li>
-
                     <li>
                         <div class="skill-card">
                             <div class="tooltip">My SQL</div>
-
                             <div class="card-icon">
-
                                 <img alt="my-sql logo" height="65"
                                      src="https://techstack-generator.vercel.app/mysql-icon.svg" width="65"/>
                             </div>
                         </div>
                     </li>
-
                     <li>
                         <div class="skill-card">
                             <div class="tooltip">C++</div>
-
                             <div class="card-icon">
                                 <img alt="cpp logo" height="65" src="https://techstack-generator.vercel.app/cpp-icon.svg"
                                      width="65"/>
                             </div>
                         </div>
                     </li>
-
                     <li>
                         <div class="skill-card">
                             <div class="tooltip">Python</div>
-
                             <div class="card-icon">
                                 <img alt="python logo" height="48" src="https://techstack-generator.vercel.app/python-icon.svg"
                                      width="48"/>
                             </div>
                         </div>
                     </li>
-
                 </ul>
 
                 <ul class="tools-list">
-
                     <li>
                         <div class="skill-card">
                             <div class="tooltip">Jira</div>
-
                             <div class="card-icon">
                                 <img alt="jira logo" height="48" src="./assets/images/jira.png" width="48">
                             </div>
@@ -420,7 +315,6 @@
                     <li>
                         <div class="skill-card">
                             <div class="tooltip">Teams</div>
-
                             <div class="card-icon">
                                 <img alt="teams logo" src="./assets/images/teams.png">
                             </div>
@@ -430,7 +324,6 @@
                     <li>
                         <div class="skill-card">
                             <div class="tooltip">Office 365</div>
-
                             <div class="card-icon">
                                 <img alt="office logo" height="65" src="./assets/images/office365.png" width="65">
                             </div>
@@ -440,7 +333,6 @@
                     <li>
                         <div class="skill-card">
                             <div class="tooltip">IntelliJ Idea</div>
-
                             <div class="card-icon">
                                 <img alt="IntelliJ Idea" height="48" src="./assets/images/intelliJ.png" width="48">
                             </div>
@@ -450,7 +342,6 @@
                     <li>
                         <div class="skill-card">
                             <div class="tooltip">Postman</div>
-
                             <div class="card-icon">
                                 <img alt="Postman logo" height="48" src="https://skillicons.dev/icons?i=postman"
                                      width="48"/>
@@ -461,7 +352,6 @@
                     <li>
                         <div class="skill-card">
                             <div class="tooltip">Git</div>
-
                             <div class="card-icon">
                                 <img alt="Git logo" src="./assets/images/git.png">
                             </div>
@@ -471,7 +361,6 @@
                     <li>
                         <div class="skill-card">
                             <div class="tooltip">GitHub</div>
-
                             <div class="card-icon">
                                 <img alt="GitHub" height="48" src="https://techstack-generator.vercel.app/github-icon.svg"
                                      width="48"/>
@@ -482,7 +371,6 @@
                     <li>
                         <div class="skill-card">
                             <div class="tooltip">Jenkins</div>
-
                             <div class="card-icon">
                                 <img alt="jenkins logo" height="48" src="https://skillicons.dev/icons?i=jenkins"
                                      width="48"/>
@@ -493,52 +381,41 @@
                     <li>
                         <div class="skill-card">
                             <div class="tooltip">Docker</div>
-
                             <div class="card-icon">
                                 <img alt="Docker logo" height="65"
                                      src="https://techstack-generator.vercel.app/docker-icon.svg" width="65"/>
                             </div>
                         </div>
                     </li>
-
                     <li>
                         <div class="skill-card">
                             <div class="tooltip">Kubernetes</div>
-
                             <div class="card-icon">
                                 <img alt="Kubernetes Logo"
                                      height="65" src="https://techstack-generator.vercel.app/kubernetes-icon.svg" width="65"/>
                             </div>
                         </div>
                     </li>
-
                     <li>
                         <div class="skill-card">
                             <div class="tooltip">Azure</div>
-
                             <div class="card-icon">
                                 <img alt="azure logo" height="48" src="https://skillicons.dev/icons?i=azure"
                                      width="48"/>
                             </div>
                         </div>
                     </li>
-
                     <li>
                         <div class="skill-card">
                             <div class="tooltip">Figma</div>
-
                             <div class="card-icon">
                                 <img alt="Figma logo" src="./assets/images/figma.png">
                             </div>
                         </div>
                     </li>
-
                 </ul>
-
             </div>
-
         </section>
-
 
         <!--
           - #PROJECTS
@@ -892,28 +769,11 @@
 
     </div>
 </footer>
-
-
-<!--
-  - #GO TO TOP
--->
-
 <a class="go-top" data-go-top href="#top" title="Go to Top">
     <ion-icon name="arrow-up"></ion-icon>
 </a>
-
-
-<!--
-  - custom js link
--->
 <script src="./assets/js/script.js"></script>
-
-<!--
-  - ionicon link
--->
 <script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js" type="module"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
 </body>
-
 </html>
