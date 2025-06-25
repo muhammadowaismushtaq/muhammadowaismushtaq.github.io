@@ -103,3 +103,16 @@ if (localStorage.getItem("theme") === "light_theme") {
     document.body.classList.remove("light_theme");
     document.body.classList.add("dark_theme");
 }
+
+/**
+ * close navbar when any nav link is clicked (mobile UX)
+ */
+const navLinks = document.querySelectorAll(".navbar-link");
+
+navLinks.forEach(link => {
+    link.addEventListener("click", function () {
+        navbar.classList.remove("active");
+        navToggleBtn.classList.remove("active");
+        document.body.classList.remove("active");
+    });
+});
