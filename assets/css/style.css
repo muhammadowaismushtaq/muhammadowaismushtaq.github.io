@@ -285,6 +285,10 @@ body.active {
     z-index: 1;
 }
 
+.about-title {
+    color: var(--raw-seinna);
+}
+
 
 /*-----------------------------------*\
  * #HEADER
@@ -495,7 +499,7 @@ main {
 
 .hero-banner {
     max-width: 500px;
-    width: 125%;
+    width: 150%;
     margin-bottom: 30px;
 }
 
@@ -1379,18 +1383,6 @@ textarea.input-field {
 
     .section-title {
         max-width: 460px;
-    }
-
-
-    /**
-     * HERO
-     */
-    .hero-social-list {
-        left: -80px;
-    }
-
-    .scroll-down {
-        right: -80px;
     }
 
 
