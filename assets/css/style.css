@@ -974,6 +974,57 @@ textarea.input-field {
     transform: translateY(0);
 }
 
+/* ===== Preloader Styles ===== */
+#preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column; /* Stack GIF and text vertically */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #0d1013;
+    transition: opacity 0.45s ease, visibility 0.45s ease;
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ===== Loader GIF ===== */
+#preloader-img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    user-select: none;
+    -webkit-user-drag: none;
+    display: block;
+}
+
+/* ===== Loading Text ===== */
+.preloader-text {
+    margin-top: 12px; /* gap between GIF and text */
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #ffffff; /* you can change to #00A9FF for accent */
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    animation: pulse 1.6s ease-in-out infinite;
+}
+
+/* ===== Text Pulse Animation ===== */
+@keyframes pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+}
+
+/* ===== Fade-out (applied by JS) ===== */
+#preloader.preloader--hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
 
 /*-----------------------------------*\
  * #MEDIA QUERIES
