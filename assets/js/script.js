@@ -116,3 +116,43 @@ navLinks.forEach(link => {
         document.body.classList.remove("active");
     });
 });
+
+/**
+ * Easy selector helper function (Used in the existing file structure)
+ */
+const select = (el, all = false) => {
+    el = el.trim();
+    if (all) {
+        return [...document.querySelectorAll(el)];
+    } else {
+        return document.querySelector(el);
+    }
+}
+
+/**
+ * Preloader: fade out after short delay, then remove
+ */
+let preloader = select('#preloader');
+
+if (preloader) {
+    window.addEventListener('load', () => {
+        // ⏳ Force loader to stay for at least 2 seconds
+        setTimeout(() => {
+            preloader.classList.add('preloader--hidden');
+
+            const onTransitionEnd = (e) => {
+                if (e.propertyName === 'opacity') {
+                    preloader.removeEventListener('transitionend', onTransitionEnd);
+                    if (preloader.parentNode) preloader.parentNode.removeChild(preloader);
+                }
+            };
+
+            preloader.addEventListener('transitionend', onTransitionEnd);
+
+            // Fallback removal
+            setTimeout(() => {
+                if (preloader.parentNode) preloader.parentNode.removeChild(preloader);
+            }, 1000);
+        }, 2000); // <-- duration before fade-out (in ms)
+    });
+}
