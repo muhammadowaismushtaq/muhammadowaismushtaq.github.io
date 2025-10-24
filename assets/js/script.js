@@ -153,6 +153,29 @@ if (preloader) {
             setTimeout(() => {
                 if (preloader.parentNode) preloader.parentNode.removeChild(preloader);
             }, 1000);
-        }, 2000); // <-- duration before fade-out (in ms)
+        }, 1500); // <-- duration before fade-out (in ms)
     });
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById("myModal");
+    const openModal = document.getElementById("openModal");
+    const closeModal = document.getElementById("closeModal");
+
+    if (openModal && modal && closeModal) {
+        openModal.onclick = (e) => {
+            e.preventDefault();
+            modal.style.display = "block";
+        };
+
+        closeModal.onclick = () => {
+            modal.style.display = "none";
+        };
+
+        window.onclick = (event) => {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+    }
+});
