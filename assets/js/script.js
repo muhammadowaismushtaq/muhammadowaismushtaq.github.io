@@ -159,23 +159,29 @@ if (preloader) {
 
 document.addEventListener("DOMContentLoaded", () => {
     const modal = document.getElementById("myModal");
-    const openModal = document.getElementById("openModal");
+    const openModalButtons = document.querySelectorAll(".openModal"); // select by class
     const closeModal = document.getElementById("closeModal");
 
-    if (openModal && modal && closeModal) {
-        openModal.onclick = (e) => {
-            e.preventDefault();
-            modal.style.display = "block";
-        };
+    // Ensure elements exist
+    if (modal && closeModal && openModalButtons.length > 0) {
+        // Attach click listener to each trigger
+        openModalButtons.forEach((btn) => {
+            btn.addEventListener("click", (e) => {
+                e.preventDefault();
+                modal.style.display = "block";
+            });
+        });
 
-        closeModal.onclick = () => {
+        // Close when clicking X
+        closeModal.addEventListener("click", () => {
             modal.style.display = "none";
-        };
+        });
 
-        window.onclick = (event) => {
+        // Close when clicking outside the modal content
+        window.addEventListener("click", (event) => {
             if (event.target === modal) {
                 modal.style.display = "none";
             }
-        };
+        });
     }
 });
