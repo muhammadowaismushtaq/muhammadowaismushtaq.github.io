@@ -1000,6 +1000,11 @@ textarea.input-field {
     line-height: 1.6;
 }
 
+/* The global reset makes spans and links block-level; keep the copyright on one line. */
+.copyright span {
+    display: inline;
+}
+
 .copyright a {
     display: inline-block;
     color: var(--raw-seinna);

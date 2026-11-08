@@ -1,7 +1,108 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="uRebal">
-  <rect width="800" height="600" fill="#303030"/>
-  <rect x="0" y="560" width="800" height="40" fill="#E07B45"/>
-  <g fill="none" stroke="#E07B45" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"><rect x="250" y="110" width="120" height="180" rx="12"/><rect x="430" y="110" width="120" height="180" rx="12"/><path d="M372 200h56m-14-14 14 14-14 14"/><path d="M280 150h60M280 190h60M280 230h40M460 150h60M460 190h60M460 230h40"/></g>
-  <text x="400" y="430" fill="#FFFFFF" font-family="Poppins, Arial, sans-serif" font-size="54" font-weight="700" text-anchor="middle">uRebal</text>
-  <text x="400" y="485" fill="#9E9E9E" font-family="Roboto, Arial, sans-serif" font-size="28" text-anchor="middle">Backend modernization</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1000" role="img" aria-label="uRebal model portfolio rebalancing screen">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFF8F0"/>
+      <stop offset="1" stop-color="#FBE7D4"/>
+    </linearGradient>
+    <linearGradient id="btn" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#F09A62"/>
+      <stop offset="1" stop-color="#E2773A"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#B4693A" flood-opacity="0.18"/>
+    </filter>
+    <clipPath id="windowClip"><rect x="240" y="300" width="720" height="600" rx="24"/></clipPath>
+  </defs>
+
+  <rect width="1200" height="1000" fill="url(#bg)"/>
+  <circle cx="600" cy="560" r="470" fill="#F9DCC3" opacity="0.45"/>
+  <circle cx="600" cy="560" r="400" fill="none" stroke="#E5874A" stroke-width="4" stroke-linecap="round" stroke-dasharray="0.1 14" opacity="0.8"/>
+
+  <!-- connectors -->
+  <g stroke="#E5874A" stroke-width="4" stroke-linecap="round" stroke-dasharray="0.1 12" fill="none" opacity="0.8">
+    <line x1="600" y1="250" x2="600" y2="300"/>
+    <line x1="180" y1="480" x2="240" y2="480"/>
+    <line x1="960" y1="440" x2="1020" y2="440"/>
+  </g>
+
+  <!-- Automated Rebalancing -->
+  <circle cx="600" cy="110" r="72" fill="#FFFFFF" filter="url(#shadow)"/>
+  <g transform="translate(600 110)" fill="none" stroke="#E5874A">
+    <circle r="26" stroke-width="12" stroke-dasharray="9 6.3"/>
+    <circle r="19" stroke-width="7"/>
+  </g>
+  <text x="600" y="218" text-anchor="middle" font-family="Poppins, 'Segoe UI', Roboto, Arial, sans-serif" font-size="23" font-weight="700" fill="#7A6A5E">Automated</text>
+  <text x="600" y="244" text-anchor="middle" font-family="Poppins, 'Segoe UI', Roboto, Arial, sans-serif" font-size="23" font-weight="700" fill="#7A6A5E">Rebalancing</text>
+
+  <!-- Trade Optimization -->
+  <circle cx="110" cy="480" r="72" fill="#FFFFFF" filter="url(#shadow)"/>
+  <g transform="translate(110 480)" fill="#E5874A" stroke="#E5874A" stroke-width="4" stroke-linecap="round">
+    <line x1="-18" y1="-26" x2="-18" y2="22"/><rect x="-25" y="-14" width="14" height="24" rx="3"/>
+    <line x1="0" y1="-30" x2="0" y2="26"/><rect x="-7" y="-20" width="14" height="30" rx="3"/>
+    <line x1="18" y1="-22" x2="18" y2="24"/><rect x="11" y="-8" width="14" height="22" rx="3"/>
+  </g>
+  <text x="110" y="590" text-anchor="middle" font-family="Poppins, 'Segoe UI', Roboto, Arial, sans-serif" font-size="23" font-weight="700" fill="#7A6A5E">Trade</text>
+  <text x="110" y="616" text-anchor="middle" font-family="Poppins, 'Segoe UI', Roboto, Arial, sans-serif" font-size="23" font-weight="700" fill="#7A6A5E">Optimization</text>
+
+  <!-- Execution at Scale -->
+  <circle cx="1090" cy="440" r="72" fill="#FFFFFF" filter="url(#shadow)"/>
+  <g transform="translate(1090 440)" fill="none" stroke="#E5874A" stroke-width="7" stroke-linejoin="round" stroke-linecap="round">
+    <polygon points="0,-30 32,-14 0,2 -32,-14"/>
+    <polyline points="-32,0 0,16 32,0"/>
+    <polyline points="-32,14 0,30 32,14"/>
+  </g>
+  <text x="1090" y="550" text-anchor="middle" font-family="Poppins, 'Segoe UI', Roboto, Arial, sans-serif" font-size="23" font-weight="700" fill="#7A6A5E">Execution</text>
+  <text x="1090" y="576" text-anchor="middle" font-family="Poppins, 'Segoe UI', Roboto, Arial, sans-serif" font-size="23" font-weight="700" fill="#7A6A5E">at Scale</text>
+
+  <!-- app window -->
+  <rect x="240" y="300" width="720" height="600" rx="24" fill="#FFFFFF" filter="url(#shadow)"/>
+  <g clip-path="url(#windowClip)">
+    <rect x="240" y="300" width="720" height="76" fill="#F5EEE8"/>
+    <line x1="240" y1="376" x2="960" y2="376" stroke="#EADBCD" stroke-width="2"/>
+  </g>
+  <rect x="240" y="300" width="720" height="600" rx="24" fill="none" stroke="#EFE2D6" stroke-width="2"/>
+  <circle cx="282" cy="338" r="9" fill="#E5874A"/>
+  <circle cx="310" cy="338" r="9" fill="#D9CFC6"/>
+  <circle cx="338" cy="338" r="9" fill="#D9CFC6"/>
+  <text x="600" y="347" text-anchor="middle" font-family="Poppins, 'Segoe UI', Roboto, Arial, sans-serif" font-size="25" font-weight="700" fill="#2E2A27">uRebal — Model Portfolio</text>
+
+  <g font-family="Roboto, 'Segoe UI', Arial, sans-serif">
+    <!-- stat cards -->
+    <rect x="278" y="404" width="314" height="118" rx="16" fill="#FFF9F4" stroke="#F1E3D6" stroke-width="2"/>
+    <text x="302" y="440" font-size="20" fill="#8A7D72">Portfolio Drift</text>
+    <text x="302" y="494" font-size="40" font-weight="700" fill="#E2773A">4.8%</text>
+    <polyline points="508,476 532,452 548,466 572,438" fill="none" stroke="#E5874A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <polyline points="556,436 573,437 572,454" fill="none" stroke="#E5874A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <rect x="608" y="404" width="314" height="118" rx="16" fill="#FFF9F4" stroke="#F1E3D6" stroke-width="2"/>
+    <text x="632" y="440" font-size="20" fill="#8A7D72">Trades Ready</text>
+    <text x="632" y="494" font-size="40" font-weight="700" fill="#2E2A27">12</text>
+    <circle cx="874" cy="463" r="28" fill="#FCE3D0"/>
+    <polyline points="862,463 871,473 888,453" fill="none" stroke="#E2773A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- trade table -->
+    <text x="278" y="574" font-size="21" font-weight="700" fill="#2E2A27">Trade</text>
+    <text x="922" y="574" font-size="21" font-weight="700" fill="#2E2A27" text-anchor="end">Action</text>
+    <line x1="278" y1="590" x2="922" y2="590" stroke="#EFE2D6" stroke-width="2"/>
+
+    <rect x="278" y="609" width="20" height="20" rx="3" fill="#4A4440"/>
+    <text x="314" y="626" font-size="21" fill="#4A4440">US Equities</text>
+    <text x="922" y="626" font-size="19" font-weight="700" fill="#E2773A" text-anchor="end">BUY</text>
+
+    <rect x="278" y="657" width="20" height="20" rx="3" fill="#E5874A"/>
+    <text x="314" y="674" font-size="21" fill="#4A4440">Intl Equities</text>
+    <text x="922" y="674" font-size="19" font-weight="700" fill="#E2773A" text-anchor="end">BUY</text>
+
+    <rect x="278" y="705" width="20" height="20" rx="3" fill="#A39A93"/>
+    <text x="314" y="722" font-size="21" fill="#4A4440">Fixed Income</text>
+    <text x="922" y="722" font-size="19" font-weight="700" fill="#4A4440" text-anchor="end">SELL</text>
+
+    <rect x="278" y="753" width="20" height="20" rx="3" fill="#DDD5CE"/>
+    <text x="314" y="770" font-size="21" fill="#4A4440">Cash</text>
+    <text x="922" y="770" font-size="19" font-weight="700" fill="#4A4440" text-anchor="end">SELL</text>
+
+    <!-- action button -->
+    <rect x="278" y="804" width="644" height="68" rx="14" fill="url(#btn)"/>
+    <text x="600" y="847" text-anchor="middle" font-size="25" font-weight="700" fill="#FFFFFF">Execute Trades</text>
+  </g>
 </svg>

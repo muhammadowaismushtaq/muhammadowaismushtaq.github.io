@@ -26,13 +26,13 @@
 /** CSS class used throughout the site to mark an element as open / active. */
 const ACTIVE_CLASS = "active";
 
-/** localStorage key under which the chosen colour theme is saved. */
+/** localStorage key under which the chosen color theme is saved. */
 const THEME_STORAGE_KEY = "theme";
 
-/** Body class for the dark colour theme (the default). */
+/** Body class for the dark color theme (the default). */
 const DARK_THEME_CLASS = "dark_theme";
 
-/** Body class for the light colour theme. */
+/** Body class for the light color theme. */
 const LIGHT_THEME_CLASS = "light_theme";
 
 /** Scroll distance (px) after which the header becomes sticky and the go-to-top button appears. */
@@ -183,7 +183,7 @@ function saveTheme(themeClassName) {
 }
 
 /**
- * Applies a colour theme to the page and syncs the theme button's active state with it
+ * Applies a color theme to the page and syncs the theme button's active state with it
  * (active = light theme).
  *
  * @param {string} themeClassName - {@link DARK_THEME_CLASS} or {@link LIGHT_THEME_CLASS}.

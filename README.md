@@ -21,7 +21,7 @@ Hi there — I’m **Muhammad Owais Mushtaq**, a software developer with a stron
 
 Here are some highlighted projects from my GitHub portfolio that you’ll find on this site:
 
-- **ATM Cash Predictor** — A machine-learning project forecasting ATM cash refill.  
+- **ATM Cash Predictor** — A machine-learning project forecasting ATM cash refills.  
 - **Parallel Cryptography** — Cryptographic algorithms implemented in parallel for efficiency.  
 - **Steganographer** — A steganography utility for hiding and extracting data.  
 - **Dynamic Problem Solver** — Tools & algorithms for solving dynamic / optimization problems.
@@ -34,7 +34,7 @@ _(For a full list of my projects, check out the Projects section on the site or 
 
 This website is powered by:
 
-- **GitHub Pages** — Hosting the site with GitHub’s free pages service  
+- **GitHub Pages** — Hosting the site with GitHub’s free Pages service  
 - **HTML / CSS / JavaScript** — For the front‑end structure and styling  
 - *(Optional: Jekyll, if you're using a static site generator)*  
 
@@ -46,4 +46,6 @@ If you want to run this site locally (for development or testing), here’s how:
 
 1. Clone this repository  
    ```bash
-   git clone https://github.com/muhammadowaismushtaq/muhammadowaismushtaq.github.io.git  
+   git clone https://github.com/muhammadowaismushtaq/muhammadowaismushtaq.github.io.git
+   ```
+2. Open `index.html` in a browser, or serve the folder with any static file server.

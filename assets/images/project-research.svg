@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="AI-Augmented Agile">
-  <rect width="800" height="600" fill="#303030"/>
-  <rect x="0" y="560" width="800" height="40" fill="#E07B45"/>
-  <g fill="none" stroke="#E07B45" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"><path d="M330 100h110l50 50v150H330z"/><path d="M440 100v50h50"/><path d="M360 190h100M360 225h100M360 260h70"/></g>
-  <text x="400" y="430" fill="#FFFFFF" font-family="Poppins, Arial, sans-serif" font-size="54" font-weight="700" text-anchor="middle">AI-Augmented Agile</text>
-  <text x="400" y="485" fill="#9E9E9E" font-family="Roboto, Arial, sans-serif" font-size="28" text-anchor="middle">MVP Development · Research</text>
-</svg>
