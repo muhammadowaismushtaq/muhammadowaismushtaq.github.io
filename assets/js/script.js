@@ -351,7 +351,7 @@ function waitForPageLoad() {
 }
 
 /**
- * Resolves once the web fonts in use (Poppins, Roboto, Saira Stencil One) are ready, so the
+ * Resolves once the web fonts in use (Poppins, Roboto, Russo One) are ready, so the
  * page is not revealed with fallback fonts that then visibly swap. Resolves immediately in
  * browsers without the CSS Font Loading API, and never rejects.
  *

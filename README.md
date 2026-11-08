@@ -1,65 +1,99 @@
-# Muhammad Owais Mushtaq — Portfolio
+# Muhammad Owais Mushtaq — Portfolio Website
 
-Welcome to my personal website repository! This GitHub Pages site is where I showcase who I am, what I do, and the projects I'm passionate about.
+The source of my personal portfolio: a fast, single-page static site that introduces who I am, what I build, my education and research, the tools I work with, and how to reach me.
 
-[Visit the live site →](https://muhammadowaismushtaq.github.io)
-
----
-
-## 🚀 About Me
-
-Hi there — I’m **Muhammad Owais Mushtaq**, a software developer with a strong interest in backend engineering, enterprise architecture, and open-source development. On this site, I share:
-
-- My **professional journey** and background  
-- Key **projects and works** I’ve built or contributed to  
-- My **tech stack**, skills, and what I'm learning now  
-- Ways to connect with me (socials, email, etc.)
+**Live site:** [muhammadowaismushtaq.github.io](https://muhammadowaismushtaq.github.io)
 
 ---
 
-## 💻 Featured Projects
+## ✨ Features
 
-Here are some highlighted projects from my GitHub portfolio that you’ll find on this site:
-
-- **ATM Cash Predictor** — A machine-learning project forecasting ATM cash refills.  
-- **Parallel Cryptography** — Cryptographic algorithms implemented in parallel for efficiency.  
-- **Steganographer** — A steganography utility for hiding and extracting data.  
-- **Dynamic Problem Solver** — Tools & algorithms for solving dynamic / optimization problems.
-
-_(For a full list of my projects, check out the Projects section on the site or browse my GitHub repositories.)_
-
----
-
-## 🧰 Tech Stack & Tools
-
-This website is powered by:
-
-- **GitHub Pages** — Hosting the site with GitHub’s free Pages service  
-- **HTML / CSS / JavaScript** — For the front‑end structure and styling  
-- *(Optional: Jekyll, if you're using a static site generator)*  
+- **Eight languages.** English, Spanish, French, German, Chinese, Japanese, Arabic and Urdu, picked from the header menu. The choice is remembered, links such as `?lang=fr` open the site straight in a language, and Arabic and Urdu switch the page to right-to-left.
+- **Dark and light themes.** A toggle in the header switches themes; the choice is remembered for the next visit.
+- **Résumé download.** "Download Résumé" in the About section opens the latest PDF.
+- **WhatsApp chat pop-up.** The WhatsApp icons open a chat window in a pop-up. It is loaded only on first open, so it never slows down the page.
+- **Contact form.** Messages are delivered by [Formspree](https://formspree.io), with a hidden honeypot field to filter out spam bots.
+- **Smart loading screen.** The animated loader closes as soon as the page, fonts and chosen language are ready, instead of after a fixed delay (with a safety timeout so it can never get stuck).
+- **Adaptive header.** If a language's menu words are longer, the menu font shrinks to fit beside the logo instead of overlapping it.
+- **Responsive.** Layouts for phones, tablets and desktops, with a full-screen menu on small screens.
+- **Link previews.** Open Graph and Twitter card tags give a proper title, description and banner image when the site is shared on LinkedIn, WhatsApp or X.
+- **Security-minded.** A Content Security Policy limits scripts, styles, fonts, images, frames and form posts to the sources the page needs; the third-party icon script is pinned to a version and checked with Subresource Integrity; external links use `rel="noopener noreferrer"`; and scripts only insert plain text, never HTML.
 
 ---
 
-## 📚 How to Run Locally
+## 🗂️ Project structure
 
-If you want to run this site locally (for development or testing), here’s how:
+```text
+muhammadowaismushtaq.github.io/
+├── index.html                  # The whole page: header, hero, stats, about, education,
+│                               # skills, portfolio, contact form, footer, WhatsApp pop-up
+├── favicon.svg
+├── assets/
+│   ├── css/
+│   │   └── style.css           # All styles, themes and responsive breakpoints
+│   ├── js/
+│   │   ├── i18n.js             # Language switching (loads before script.js)
+│   │   └── script.js           # Header, menu, themes, skills toggle, loader,
+│   │                           # WhatsApp pop-up, copyright year
+│   ├── i18n/
+│   │   ├── en.json             # One file per language, all with the same keys
+│   │   └── es.json, fr.json, de.json, zh.json, ja.json, ar.json, ur.json
+│   ├── images/                 # Photos, project images, skill icons, loader animation
+│   └── resume/
+│       └── Resume - Muhammad Owais Mushtaq.pdf
+├── .github/workflows/
+│   └── jekyll-gh-pages.yml     # Builds and deploys the site to GitHub Pages
+└── LICENSE
+```
 
-1. Clone this repository  
+There is no build step or framework: plain HTML, CSS and JavaScript. External resources are limited to Google Fonts (Poppins, Roboto, Russo One) and [Ionicons](https://ionic.io/ionicons) for icons.
+
+---
+
+## 🚀 Deployment
+
+The site is hosted on **GitHub Pages**. Every push to `main` runs the GitHub Actions workflow in `.github/workflows/jekyll-gh-pages.yml`, which builds the site and publishes it to [muhammadowaismushtaq.github.io](https://muhammadowaismushtaq.github.io). Progress and logs are under the repository's **Actions** tab.
+
+Work happens on feature branches (for example `enhancement/ui-update` or `feature/i18n`) and reaches the live site when merged into `main`.
+
+---
+
+## 💻 Run locally
+
+1. Clone the repository:
    ```bash
    git clone https://github.com/muhammadowaismushtaq/muhammadowaismushtaq.github.io.git
    ```
-2. Open `index.html` in a browser, or serve the folder with any static file server.
+2. Serve the folder with any static file server, for example:
+   ```bash
+   npx serve .
+   ```
+   or `python -m http.server`, then open the address it prints.
+
+Opening `index.html` directly from disk mostly works, but the translations are loaded with `fetch`, which browsers block for `file://` pages, so use a local server to test languages.
 
 ---
 
 ## 🌐 Languages
 
-The site is available in English, Spanish, French, German, Chinese, Japanese, Arabic and Urdu. Visitors pick a language from the menu in the header; the choice is remembered, and a link such as `?lang=fr` opens the site directly in that language. Arabic and Urdu switch the page to right-to-left.
-
-**How it works:** each piece of text in `index.html` has a key (`data-i18n="hero.title"`, or `data-i18n-attr="placeholder:contact.form.name"` for attributes). `assets/js/i18n.js` swaps in the text from `assets/i18n/<language>.json`. The English text in `index.html` is the fallback, so a missing translation simply shows in English.
+Each piece of text in `index.html` has a key: `data-i18n="hero.title"` for an element's text, or `data-i18n-attr="placeholder:contact.form.namePlaceholder"` for an attribute (several pairs separated by `;`). `assets/js/i18n.js` swaps in the text from `assets/i18n/<language>.json`. The English text written in `index.html` is the fallback, so a missing translation simply shows in English.
 
 **To change or add text:**
 1. Edit the text in `index.html` and give the element a `data-i18n` key.
 2. Add the same key to `assets/i18n/en.json` and to every other language file.
 
 **To add a language:** copy `assets/i18n/en.json` to `assets/i18n/<code>.json`, translate the values, add the code to `SUPPORTED_LANGUAGES` in `assets/js/i18n.js` (and to `RIGHT_TO_LEFT_LANGUAGES` for a right-to-left script), and add an `<option>` to the language menu in `index.html`.
+
+---
+
+## ✏️ Common updates
+
+- **Résumé:** replace `assets/resume/Resume - Muhammad Owais Mushtaq.pdf`, keeping the same file name so the download link keeps working.
+- **Portfolio card:** copy an existing `<li>` in the `#portfolio` section of `index.html`, change its link, image (in `assets/images/`), title and date, and add translation keys for the title and date.
+- **Skill icon:** add the icon to `assets/images/` and copy an existing `<li>` in the skills or tools list.
+
+---
+
+## 📄 License
+
+[MIT](LICENSE) © Muhammad Owais Mushtaq

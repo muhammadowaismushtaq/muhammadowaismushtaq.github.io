@@ -22,7 +22,7 @@
      * typography
      */
 
-    --ff-saira-stencil-one: "Saira Stencil One", sans-serif;
+    --ff-logo: "Russo One", sans-serif;
     --ff-poppins: 'Poppins', sans-serif;
     --ff-roboto: 'Roboto', sans-serif;
 
@@ -331,7 +331,9 @@ body.active {
 
 .logo a {
     color: var(--raw-seinna);
-    font-family: var(--ff-saira-stencil-one);
+    font-family: var(--ff-logo);
+    font-size: 2.25rem;
+    letter-spacing: 0.5px;
 }
 
 .navbar-actions {
@@ -1130,12 +1132,18 @@ span[data-i18n] {
     border-radius: 10px;
 }
 
-/* Contact form spam honeypot: kept out of view and out of the layout. */
+/* Contact form spam honeypot, kept out of view and out of the layout. Clipped in place rather than moved off-screen: a far-left offset made right-to-left pages
+   (Arabic, Urdu) scroll sideways to reach it. */
 .form-honeypot {
     position: absolute;
-    left: -9999px;
     width: 1px;
     height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
     opacity: 0;
 }
 
