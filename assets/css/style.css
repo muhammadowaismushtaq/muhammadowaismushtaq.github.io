@@ -22,7 +22,7 @@
      * typography
      */
 
-    --ff-logo: "Russo One", sans-serif;
+    --ff-logo: "Righteous", sans-serif;
     --ff-poppins: 'Poppins', sans-serif;
     --ff-roboto: 'Roboto', sans-serif;
 
@@ -330,10 +330,20 @@ body.active {
 }
 
 .logo a {
+    display: flex;
+    align-items: center;
+    gap: 0.25em;
     color: var(--raw-seinna);
     font-family: var(--ff-logo);
     font-size: 2.25rem;
     letter-spacing: 0.5px;
+}
+
+/* Chakor (chukar partridge) mark beside the name; sized with the text. */
+.logo-mark {
+    width: 1.15em;
+    height: 1.15em;
+    flex-shrink: 0;
 }
 
 .navbar-actions {
@@ -1059,7 +1069,7 @@ span[data-i18n] {
     inset: 0;
     z-index: 9999;
     display: flex;
-    flex-direction: column; /* Stack GIF and text vertically */
+    flex-direction: column; /* Stack the animation and text vertically */
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -1069,7 +1079,7 @@ span[data-i18n] {
     visibility: visible;
 }
 
-/* ===== Loader GIF ===== */
+/* ===== Loader animation (running chakor, assets/images/loader-chakor.svg) ===== */
 #preloader-img {
     width: 150px;
     height: 150px;
@@ -1081,7 +1091,7 @@ span[data-i18n] {
 
 /* ===== Loading Text ===== */
 .preloader-text {
-    margin-top: 12px; /* gap between GIF and text */
+    margin-top: 12px; /* gap between the animation and text */
     font-family: 'Poppins', sans-serif;
     font-size: 1rem;
     font-weight: 500;

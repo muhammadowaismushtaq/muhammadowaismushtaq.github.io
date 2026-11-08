@@ -13,7 +13,7 @@ The source of my personal portfolio: a fast, single-page static site that introd
 - **Résumé download.** "Download Résumé" in the About section opens the latest PDF.
 - **WhatsApp chat pop-up.** The WhatsApp icons open a chat window in a pop-up. It is loaded only on first open, so it never slows down the page.
 - **Contact form.** Messages are delivered by [Formspree](https://formspree.io), with a hidden honeypot field to filter out spam bots.
-- **Smart loading screen.** The animated loader closes as soon as the page, fonts and chosen language are ready, instead of after a fixed delay (with a safety timeout so it can never get stuck).
+- **Smart loading screen.** A running chakor (an animated SVG of the logo bird, a few KB instead of a large GIF) shows while the page loads. It stands still for visitors who ask their system for reduced motion, and it closes as soon as the page, fonts and chosen language are ready, instead of after a fixed delay (with a safety timeout so it can never get stuck).
 - **Adaptive header.** If a language's menu words are longer, the menu font shrinks to fit beside the logo instead of overlapping it.
 - **Responsive.** Layouts for phones, tablets and desktops, with a full-screen menu on small screens.
 - **Link previews.** Open Graph and Twitter card tags give a proper title, description and banner image when the site is shared on LinkedIn, WhatsApp or X.
@@ -46,7 +46,7 @@ muhammadowaismushtaq.github.io/
 └── LICENSE
 ```
 
-There is no build step or framework: plain HTML, CSS and JavaScript. External resources are limited to Google Fonts (Poppins, Roboto, Russo One) and [Ionicons](https://ionic.io/ionicons) for icons.
+There is no build step or framework: plain HTML, CSS and JavaScript. External resources are limited to Google Fonts (Poppins, Roboto, Righteous) and [Ionicons](https://ionic.io/ionicons) for icons.
 
 ---
 
@@ -88,6 +88,7 @@ Each piece of text in `index.html` has a key: `data-i18n="hero.title"` for an el
 
 ## ✏️ Common updates
 
+- **Logo:** the chakor (chukar partridge, Pakistan's national bird) mark lives in `assets/images/logo-chakor.svg` and is shown beside the name in the header and footer; `favicon.svg` is a copy of it for the browser tab.
 - **Résumé:** replace `assets/resume/Resume - Muhammad Owais Mushtaq.pdf`, keeping the same file name so the download link keeps working.
 - **Portfolio card:** copy an existing `<li>` in the `#portfolio` section of `index.html`, change its link, image (in `assets/images/`), title and date, and add translation keys for the title and date.
 - **Skill icon:** add the icon to `assets/images/` and copy an existing `<li>` in the skills or tools list.
