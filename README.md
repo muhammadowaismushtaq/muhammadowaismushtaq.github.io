@@ -46,7 +46,7 @@ muhammadowaismushtaq.github.io/
 └── LICENSE
 ```
 
-There is no build step or framework: plain HTML, CSS and JavaScript. External resources are limited to Google Fonts (Poppins, Roboto, Russo One) and [Ionicons](https://ionic.io/ionicons) for icons.
+There is no build step or framework: plain HTML, CSS and JavaScript. External resources are limited to Google Fonts (Poppins, Roboto, Righteous) and [Ionicons](https://ionic.io/ionicons) for icons.
 
 ---
 
