@@ -667,6 +667,8 @@ main {
 }
 
 .education-link {
+    /* The global reset makes links block-level; keep this one inside its sentence. */
+    display: inline;
     color: var(--color-primary);
     text-decoration: underline;
     transition: var(--transition-1);
