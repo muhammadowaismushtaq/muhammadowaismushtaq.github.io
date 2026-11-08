@@ -5,13 +5,26 @@
     <meta charset="UTF-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <!--
+      Content Security Policy: only allow scripts, styles, fonts, images, frames and form posts
+      from the origins this page actually uses. 'unsafe-inline' for styles is required because
+      Ionicons injects its component styles at runtime. (frame-ancestors cannot be set from a
+      meta tag; GitHub Pages does not allow custom headers.)
+    -->
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'self'; script-src 'self' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://skillicons.dev; connect-src 'self' https://unpkg.com; frame-src https://muhammadowaismushtaq.github.io; form-action https://formspree.io; base-uri 'self'; object-src 'none'">
 
-    <title>Muhammad Owais Mushtaq | Full-Stack Software Engineer & Project Manager</title>
+    <title>Muhammad Owais Mushtaq | Senior Software Engineer & Tech Lead</title>
     <meta content="Muhammad Owais Mushtaq" name="author">
-    <meta content="Portfolio of Muhammad Owais Mushtaq, a full-stack software engineer and software project manager skilled in Spring Boot, Angular, CI/CD, and Agile project delivery."
-          name="description">
-    <meta content="Muhammad Owais Mushtaq, software engineer, full-stack developer, Spring Boot, Angular, Agile project manager, CI/CD, GitHub Actions, Docker, SaaS, software project management, FAST-NUCES, National University of Computer and Emerging Sciences, FAST Alumni"
-          name="keywords">
+    <meta name="description" content="Senior Software Engineer and tech lead with 4+ years building wealth-management FinTech. I modernize legacy systems and ship AI-first, quality-led software.">
+    <meta name="keywords" content="Muhammad Owais Mushtaq, senior software engineer, tech lead, FinTech, wealth management, Spring Boot, Angular, legacy modernization, AI-assisted development, CI/CD, FAST-NUCES">
+
+    <!-- Link previews on LinkedIn, WhatsApp, X -->
+    <meta property="og:title" content="Muhammad Owais Mushtaq | Senior Software Engineer & Tech Lead">
+    <meta property="og:description" content="Modernizing legacy systems and shipping AI-first, quality-led FinTech software.">
+    <meta property="og:image" content="https://muhammadowaismushtaq.github.io/assets/images/og-banner.png">
+    <meta property="og:url" content="https://muhammadowaismushtaq.github.io/">
+    <meta name="twitter:card" content="summary_large_image">
 
     <link href="favicon.svg" rel="shortcut icon" type="image/svg+xml">
     <link href="./assets/css/style.css" rel="stylesheet">
@@ -19,6 +32,10 @@
     <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto:wght@400;700&family=Saira+Stencil+One&display=swap"
           rel="stylesheet">
+    <!-- Without JavaScript nothing would ever dismiss the preloader, so hide it up front. -->
+    <noscript>
+        <style>#preloader { display: none; }</style>
+    </noscript>
 
     <script type="application/ld+json">
         {
@@ -30,7 +47,7 @@
                 "https://www.linkedin.com/in/muhammadowaismushtaq/",
                 "https://github.com/muhammadowaismushtaq"
             ],
-            "jobTitle": "Full-Stack Software Development Engineer",
+            "jobTitle": "Senior Software Engineer",
             "alumniOf": {
                 "@type": "CollegeOrUniversity",
                 "name": "National University of Computer and Emerging Sciences - FAST"
@@ -76,6 +93,9 @@
                     <a class="navbar-link" href="#about">About.</a>
                 </li>
                 <li>
+                    <a class="navbar-link" href="#education">Education.</a>
+                </li>
+                <li>
                     <a class="navbar-link" href="#skills">Skills.</a>
                 </li>
                 <li>
@@ -96,23 +116,23 @@
                 <picture>
                     <source media="(min-width: 768px)" srcset="assets/images/hero-banner.png">
                     <source media="(min-width: 500px)" srcset="assets/images/hero-banner.png">
-                    <img alt="Muhammad Owais Mushtaq - Full-Stack Developer and Project Manager" class="w-100"
+                    <img alt="Muhammad Owais Mushtaq - Senior Software Engineer and Tech Lead" class="w-100"
                          src="assets/images/hero-banner.png">
                 </picture>
             </figure>
             <div class="hero-content">
-                <h2 class="h2 hero-title">Turning Ideas into Robust, Cloud-Native Applications</h2>
+                <h2 class="h2 hero-title">Modernizing Legacy Systems. Shipping AI-First, Quality-Led Software.</h2>
                 <a class="btn btn-primary" href="#contact">Discuss a Project</a>
             </div>
             <ul class="hero-social-list">
                 <li>
-                    <a class="hero-social-link" href="https://www.linkedin.com/in/muhammadowaismushtaq/" target="_blank">
+                    <a class="hero-social-link" href="https://www.linkedin.com/in/muhammadowaismushtaq/" target="_blank" rel="noopener noreferrer">
                         <ion-icon name="logo-linkedin"></ion-icon>
                         <div class="tooltip">Linkedin</div>
                     </a>
                 </li>
                 <li>
-                    <a class="hero-social-link" href="https://github.com/muhammadowaismushtaq" target="_blank">
+                    <a class="hero-social-link" href="https://github.com/muhammadowaismushtaq" target="_blank" rel="noopener noreferrer">
                         <ion-icon name="logo-github"></ion-icon>
                         <div class="tooltip">GitHub</div>
                     </a>
@@ -132,10 +152,10 @@
                 <li>
                     <a class="stats-card" href="#">
                         <div class="card-icon">
-                            <img alt="Badge icon" src="./assets/images/stats-card_icon-1.png">
+                            <img decoding="async" loading="lazy" alt="Badge icon" src="./assets/images/stats-card_icon-1.png">
                         </div>
                         <h2 class="h2 card-title">
-                            3+ <strong>Years in Full-Stack Engineering</strong>
+                            4+ <strong>Years building FinTech for US advisory firms</strong>
                         </h2>
                         <ion-icon name="chevron-forward-outline"></ion-icon>
                     </a>
@@ -143,10 +163,10 @@
                 <li>
                     <a class="stats-card" href="#">
                         <div class="card-icon">
-                            <img alt="Checkmark icon" src="./assets/images/stats-card_icon-2.png">
+                            <img decoding="async" loading="lazy" alt="Checkmark icon" src="./assets/images/stats-card_icon-2.png">
                         </div>
-                        <h2 class="h3 card-title">
-                            Built & Scaled <strong>Enterprise-Grade Products</strong>
+                        <h2 class="h2 card-title">
+                            4 <strong>Wealth-management products shipped and scaled</strong>
                         </h2>
                         <ion-icon name="chevron-forward-outline"></ion-icon>
                     </a>
@@ -154,10 +174,10 @@
                 <li>
                     <a class="stats-card" href="#">
                         <div class="card-icon">
-                            <img alt="Peoples rating icon" src="./assets/images/stats-card_icon-3.png">
+                            <img decoding="async" loading="lazy" alt="Peoples rating icon" src="./assets/images/stats-card_icon-3.png">
                         </div>
                         <h2 class="h2 card-title">
-                            Agile <strong>Product & Team Lead</strong>
+                            5 <strong>Engineers led as tech lead</strong>
                         </h2>
                         <ion-icon name="chevron-forward-outline"></ion-icon>
                     </a>
@@ -167,26 +187,89 @@
 
         <section class="about" id="about">
             <figure class="about-banner">
-                <img alt="Muhammad Owais Mushtaq - Full-Stack Developer and Project Manager"
+                <img decoding="async" loading="lazy" alt="Muhammad Owais Mushtaq - Senior Software Engineer and Tech Lead"
                      class="w-100"
                      src="./assets/images/about-banner.png">
             </figure>
             <div class="about-content section-content">
                 <p class="section-subtitle">About me</p>
-                <h2 class="h3 section-title">Looking for Scalable, Production-Ready Software? I Build That.</h2>
+                <h2 class="h3 section-title">Modernizing a Legacy System, Adopting AI Safely, or Tightening Delivery?</h2>
                 <p class="section-text">
-                    Hi! I’m <strong class="about-title"> Muhammad Owais Mushtaq</strong> — a full-stack software engineer and project manager with ~3 years of
-                    experience delivering high-impact software solutions across SaaS platforms,
-                    enterprise tools, cloud integrations, and legacy system modernization. I design clean architectures,
-                    build APIs and dynamic frontends, lead Agile teams, and automate CI/CD workflows that scale.
-                    Whether it's launching new products or improving existing systems, I turn complex challenges into
-                    production-ready results.
+                    I'm <strong class="about-title">Muhammad Owais Mushtaq</strong>, a Senior Software Engineer and tech lead
+                    at Matrix Systems, building wealth-management FinTech for US advisory firms. Over 4+ years I've
+                    modernized legacy platforms without big-bang risk, built new products from scratch, and set up the
+                    pipelines, quality gates and AI-first workflows that let a team ship fast without cutting corners.
+                </p>
+                <p class="section-text">
+                    I hold an MS in Software Project Management and a BS in Computer Science from FAST-NUCES, and my
+                    research on AI-augmented Agile development is under review at a Springer journal.
                 </p>
                 <div class="btn-group">
                     <a class="btn btn-secondary" href="#contact">Let’s Connect</a>
                     <a class="btn btn-primary"
-                       href="assets/resume/Resume%20-%20Muhammad%20Owais%20Mushtaq.pdf" target="_blank">Unlock My RÉSUMÉ</a>
+                       href="assets/resume/Resume%20-%20Muhammad%20Owais%20Mushtaq.pdf" target="_blank" rel="noopener noreferrer">Download Résumé</a>
                 </div>
+            </div>
+        </section>
+
+        <section class="education" id="education">
+            <div class="education-content section-content">
+                <p class="section-subtitle">Education &amp; Research</p>
+                <h2 class="h3 section-title">Learning That Shapes How I Build</h2>
+                <ul class="education-list">
+                    <li class="education-card">
+                        <div class="card-icon">
+                            <ion-icon name="school-outline"></ion-icon>
+                        </div>
+                        <div class="education-details">
+                            <h3 class="h4 education-title">MS Software Project Management</h3>
+                            <p class="education-meta">FAST-NUCES · 2024–2026</p>
+                            <p class="education-text">Thesis: AI-Augmented Agile MVP Development for Lean Tech Startups.</p>
+                        </div>
+                    </li>
+                    <li class="education-card">
+                        <div class="card-icon">
+                            <ion-icon name="school-outline"></ion-icon>
+                        </div>
+                        <div class="education-details">
+                            <h3 class="h4 education-title">BS Computer Science</h3>
+                            <p class="education-meta">FAST-NUCES · 2018–2022</p>
+                            <p class="education-text">Final year project: Vision-Based Human Activity Recognition (deep learning on video).</p>
+                        </div>
+                    </li>
+                    <li class="education-card">
+                        <div class="card-icon">
+                            <ion-icon name="document-text-outline"></ion-icon>
+                        </div>
+                        <div class="education-details">
+                            <h3 class="h4 education-title">Research</h3>
+                            <p class="education-text">
+                                <a class="education-link" href="https://doi.org/10.21203/rs.3.rs-10346557/v1"
+                                   rel="noopener noreferrer" target="_blank">AI-Augmented Agile MVP Development for Lean Tech Startups</a>,
+                                preprint under review at <em>Innovations in Systems and Software Engineering</em> (Springer)
+                            </p>
+                        </div>
+                    </li>
+                    <li class="education-card">
+                        <div class="card-icon">
+                            <ion-icon name="flask-outline"></ion-icon>
+                        </div>
+                        <div class="education-details">
+                            <h3 class="h4 education-title">Research assistant</h3>
+                            <p class="education-meta">FAST School of Management · 2025–2026</p>
+                            <p class="education-text">Co-author of a funded field study on sustainable development in Pakistan's date palm industry (under review).</p>
+                        </div>
+                    </li>
+                    <li class="education-card">
+                        <div class="card-icon">
+                            <ion-icon name="ribbon-outline"></ion-icon>
+                        </div>
+                        <div class="education-details">
+                            <h3 class="h4 education-title">Aspire Leadership Program</h3>
+                            <p class="education-meta">2024</p>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </section>
 
@@ -195,10 +278,8 @@
                 <p class="section-subtitle">My skills</p>
                 <h2 class="h3 section-title">My Code-to-Cloud Engineering Ecosystem</h2>
                 <p class="section-text">
-                    I build clean, intuitive, and responsive full-stack applications that help users and teams get
-                    things done efficiently.
-                    My work spans frontend and backend development, API design,
-                    automation, and cloud-native deployments, all driven by Agile practices.
+                    From Spring Boot APIs and Angular apps to pipelines, cloud deployments and AI-assisted workflows,
+                    I work across the full stack and the full delivery cycle.
                 </p>
                 <div class="skills-toggle" data-toggle-box>
                     <button class="toggle-btn active" data-toggle-btn>Tech</button>
@@ -209,52 +290,9 @@
                 <ul class="skills-list">
                     <li>
                         <div class="skill-card">
-                            <div class="tooltip">Html</div>
-                            <div class="card-icon">
-                                <img alt="html logo" height="48" src="https://skillicons.dev/icons?i=html" width="48"/>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="skill-card">
-                            <div class="tooltip">CSS</div>
-                            <div class="card-icon">
-                                <img alt="css logo" height="48" src="https://skillicons.dev/icons?i=css" width="48"/>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="skill-card">
-                            <div class="tooltip">TypeScript</div>
-                            <div class="card-icon">
-                                <img alt="typescript logo" height="65"
-                                     src="https://techstack-generator.vercel.app/ts-icon.svg" width="65"/>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="skill-card">
-                            <div class="tooltip">Angular</div>
-                            <div class="card-icon">
-                                <img alt="angular logo" src="./assets/images/angular.png">
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="skill-card">
-                            <div class="tooltip">Bootstrap</div>
-                            <div class="card-icon">
-                                <img alt="bootstrap logo" src="./assets/images/bootstrap.png">
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="skill-card">
                             <div class="tooltip">Java</div>
                             <div class="card-icon">
-                                <img alt="java logo" height="48"
-                                     src="https://techstack-generator.vercel.app/java-icon.svg"
-                                     width="48"/>
+                                <img alt="Java logo" decoding="async" height="48" loading="lazy" src="https://skillicons.dev/icons?i=java" width="48">
                             </div>
                         </div>
                     </li>
@@ -262,34 +300,71 @@
                         <div class="skill-card">
                             <div class="tooltip">Spring Boot</div>
                             <div class="card-icon">
-                                <img alt="spring-boot logo" height="48" src="https://skillicons.dev/icons?i=spring"
-                                     width="48"/>
+                                <img alt="Spring Boot logo" decoding="async" height="48" loading="lazy" src="https://skillicons.dev/icons?i=spring" width="48">
                             </div>
                         </div>
                     </li>
                     <li>
                         <div class="skill-card">
-                            <div class="tooltip">Rest APIs</div>
+                            <div class="tooltip">Angular</div>
                             <div class="card-icon">
-                                <img alt="rest-api logo" height="65"
-                                     src="https://techstack-generator.vercel.app/restapi-icon.svg" width="65"/>
+                                <img alt="Angular logo" decoding="async" height="48" loading="lazy" src="./assets/images/angular.png" width="48">
                             </div>
                         </div>
                     </li>
                     <li>
                         <div class="skill-card">
-                            <div class="tooltip">Swagger</div>
+                            <div class="tooltip">TypeScript</div>
                             <div class="card-icon">
-                                <img alt="swagger logo" height="48" src="./assets/images/swagger.png" width="48">
+                                <img alt="TypeScript logo" decoding="async" height="48" loading="lazy" src="https://skillicons.dev/icons?i=ts" width="48">
                             </div>
                         </div>
                     </li>
                     <li>
                         <div class="skill-card">
-                            <div class="tooltip">My SQL</div>
+                            <div class="tooltip">RabbitMQ</div>
                             <div class="card-icon">
-                                <img alt="my-sql logo" height="65"
-                                     src="https://techstack-generator.vercel.app/mysql-icon.svg" width="65"/>
+                                <img alt="RabbitMQ logo" decoding="async" height="48" loading="lazy" src="https://skillicons.dev/icons?i=rabbitmq" width="48">
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="skill-card">
+                            <div class="tooltip">Keycloak</div>
+                            <div class="card-icon">
+                                <img alt="Keycloak logo" decoding="async" height="44" loading="lazy" src="./assets/images/keycloak.svg" width="44">
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="skill-card">
+                            <div class="tooltip">SQL Server</div>
+                            <div class="card-icon">
+                                <img alt="SQL Server logo" decoding="async" height="48" loading="lazy" src="./assets/images/sqlserver.svg" width="48">
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="skill-card">
+                            <div class="tooltip">PostgreSQL</div>
+                            <div class="card-icon">
+                                <img alt="PostgreSQL logo" decoding="async" height="48" loading="lazy" src="https://skillicons.dev/icons?i=postgres" width="48">
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="skill-card">
+                            <div class="tooltip">MySQL</div>
+                            <div class="card-icon">
+                                <img alt="MySQL logo" decoding="async" height="48" loading="lazy" src="https://skillicons.dev/icons?i=mysql" width="48">
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="skill-card">
+                            <div class="tooltip">Liquibase</div>
+                            <div class="card-icon">
+                                <img alt="Liquibase logo" decoding="async" height="48" loading="lazy" src="./assets/images/liquibase.svg" width="48">
                             </div>
                         </div>
                     </li>
@@ -297,9 +372,7 @@
                         <div class="skill-card">
                             <div class="tooltip">C++</div>
                             <div class="card-icon">
-                                <img alt="cpp logo" height="65"
-                                     src="https://techstack-generator.vercel.app/cpp-icon.svg"
-                                     width="65"/>
+                                <img alt="C++ logo" decoding="async" height="48" loading="lazy" src="https://skillicons.dev/icons?i=cpp" width="48">
                             </div>
                         </div>
                     </li>
@@ -307,9 +380,7 @@
                         <div class="skill-card">
                             <div class="tooltip">Python</div>
                             <div class="card-icon">
-                                <img alt="python logo" height="48"
-                                     src="https://techstack-generator.vercel.app/python-icon.svg"
-                                     width="48"/>
+                                <img alt="Python logo" decoding="async" height="48" loading="lazy" src="https://skillicons.dev/icons?i=py" width="48">
                             </div>
                         </div>
                     </li>
@@ -318,86 +389,9 @@
                 <ul class="tools-list">
                     <li>
                         <div class="skill-card">
-                            <div class="tooltip">Jira</div>
-                            <div class="card-icon">
-                                <img alt="jira logo" height="48" src="./assets/images/jira.png" width="48">
-                            </div>
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="skill-card">
-                            <div class="tooltip">Teams</div>
-                            <div class="card-icon">
-                                <img alt="teams logo" src="./assets/images/teams.png">
-                            </div>
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="skill-card">
-                            <div class="tooltip">Office 365</div>
-                            <div class="card-icon">
-                                <img alt="office logo" height="65" src="./assets/images/office365.png" width="65">
-                            </div>
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="skill-card">
-                            <div class="tooltip">IntelliJ Idea</div>
-                            <div class="card-icon">
-                                <img alt="IntelliJ Idea" height="48" src="./assets/images/intelliJ.png" width="48">
-                            </div>
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="skill-card">
-                            <div class="tooltip">Postman</div>
-                            <div class="card-icon">
-                                <img alt="Postman logo" height="48" src="https://skillicons.dev/icons?i=postman"
-                                     width="48"/>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="skill-card">
-                            <div class="tooltip">Git</div>
-                            <div class="card-icon">
-                                <img alt="Git logo" src="./assets/images/git.png">
-                            </div>
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="skill-card">
-                            <div class="tooltip">GitHub</div>
-                            <div class="card-icon">
-                                <img alt="GitHub" height="48"
-                                     src="https://techstack-generator.vercel.app/github-icon.svg"
-                                     width="48"/>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="skill-card">
-                            <div class="tooltip">Jenkins</div>
-                            <div class="card-icon">
-                                <img alt="jenkins logo" height="48" src="https://skillicons.dev/icons?i=jenkins"
-                                     width="48"/>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="skill-card">
                             <div class="tooltip">Docker</div>
                             <div class="card-icon">
-                                <img alt="Docker logo" height="65"
-                                     src="https://techstack-generator.vercel.app/docker-icon.svg" width="65"/>
+                                <img alt="Docker logo" decoding="async" height="48" loading="lazy" src="https://skillicons.dev/icons?i=docker" width="48">
                             </div>
                         </div>
                     </li>
@@ -405,9 +399,7 @@
                         <div class="skill-card">
                             <div class="tooltip">Kubernetes</div>
                             <div class="card-icon">
-                                <img alt="Kubernetes Logo"
-                                     height="65" src="https://techstack-generator.vercel.app/kubernetes-icon.svg"
-                                     width="65"/>
+                                <img alt="Kubernetes logo" decoding="async" height="48" loading="lazy" src="https://skillicons.dev/icons?i=kubernetes" width="48">
                             </div>
                         </div>
                     </li>
@@ -415,16 +407,79 @@
                         <div class="skill-card">
                             <div class="tooltip">Azure</div>
                             <div class="card-icon">
-                                <img alt="azure logo" height="48" src="https://skillicons.dev/icons?i=azure"
-                                     width="48"/>
+                                <img alt="Azure logo" decoding="async" height="48" loading="lazy" src="https://skillicons.dev/icons?i=azure" width="48">
                             </div>
                         </div>
                     </li>
                     <li>
                         <div class="skill-card">
-                            <div class="tooltip">Figma</div>
+                            <div class="tooltip">AWS</div>
                             <div class="card-icon">
-                                <img alt="Figma logo" src="./assets/images/figma.png">
+                                <img alt="AWS logo" decoding="async" height="48" loading="lazy" src="https://skillicons.dev/icons?i=aws" width="48">
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="skill-card">
+                            <div class="tooltip">GitHub Actions</div>
+                            <div class="card-icon">
+                                <img alt="GitHub Actions logo" decoding="async" height="48" loading="lazy" src="https://skillicons.dev/icons?i=githubactions" width="48">
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="skill-card">
+                            <div class="tooltip">Jenkins</div>
+                            <div class="card-icon">
+                                <img alt="Jenkins logo" decoding="async" height="48" loading="lazy" src="https://skillicons.dev/icons?i=jenkins" width="48">
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="skill-card">
+                            <div class="tooltip">Bitbucket Pipelines</div>
+                            <div class="card-icon">
+                                <img alt="Bitbucket logo" decoding="async" height="48" loading="lazy" src="./assets/images/bitbucket.png" width="48">
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="skill-card">
+                            <div class="tooltip">SonarCloud</div>
+                            <div class="card-icon">
+                                <img alt="SonarCloud logo" decoding="async" height="44" loading="lazy" src="./assets/images/sonarcloud.svg" width="44">
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="skill-card">
+                            <div class="tooltip">Claude</div>
+                            <div class="card-icon">
+                                <img alt="Claude logo" decoding="async" height="44" loading="lazy" src="./assets/images/claude.svg" width="44">
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="skill-card">
+                            <div class="tooltip">GitHub Copilot</div>
+                            <div class="card-icon">
+                                <img alt="GitHub Copilot logo" decoding="async" height="44" loading="lazy" src="./assets/images/githubcopilot.svg" width="44">
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="skill-card">
+                            <div class="tooltip">Jira</div>
+                            <div class="card-icon">
+                                <img alt="Jira logo" decoding="async" height="48" loading="lazy" src="./assets/images/jira.png" width="48">
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="skill-card">
+                            <div class="tooltip">Postman</div>
+                            <div class="card-icon">
+                                <img alt="Postman logo" decoding="async" height="48" loading="lazy" src="https://skillicons.dev/icons?i=postman" width="48">
                             </div>
                         </div>
                     </li>
@@ -442,138 +497,87 @@
 
                 <li>
                     <div class="project-content section-content">
-
                         <p class="section-subtitle">My Works</p>
-
-                        <h2 class="h3 section-title">See My Works Which Will Amaze You!</h2>
-
-                        <p class="section-text">
-                            This section is currently under development. Exciting updates coming soon!
-                        </p>
-
+                        <h2 class="h3 section-title">Products and Research I've Worked On</h2>
                     </div>
                 </li>
 
                 <li>
-                    <a class="project-card" href="https://partipris-invest.com/" target="_blank">
-
+                    <a class="project-card" href="https://www.softpak.com/solutions/universal-rebalancer/" rel="noopener noreferrer" target="_blank">
                         <figure class="card-banner">
-                            <img alt="Advisor Sketchbook" class="w-100"
+                            <img alt="uRebal backend modernization" class="w-100" decoding="async" loading="lazy"
+                                 src="./assets/images/project-urebal.svg">
+                        </figure>
+                        <div class="card-content">
+                            <h3 class="h4 card-title">uRebal: backend modernization</h3>
+                            <p class="publish-date">2026 – Present</p>
+                        </div>
+                    </a>
+                </li>
+
+                <li>
+                    <a class="project-card" href="https://www.softpak.com/solutions/urebal-hub/" rel="noopener noreferrer" target="_blank">
+                        <figure class="card-banner">
+                            <img alt="uRebal Hub" class="w-100" decoding="async" loading="lazy"
+                                 src="./assets/images/project-urebal-hub.svg">
+                        </figure>
+                        <div class="card-content">
+                            <h3 class="h4 card-title">uRebal Hub</h3>
+                            <p class="publish-date">Ongoing</p>
+                        </div>
+                    </a>
+                </li>
+
+                <li>
+                    <a class="project-card" href="https://partipris-invest.com/advisor-wealthdesign/" rel="noopener noreferrer" target="_blank">
+                        <figure class="card-banner">
+                            <img alt="Advisor Sketchbook" class="w-100" decoding="async" loading="lazy"
                                  src="./assets/images/project-1.png">
                         </figure>
-
                         <div class="card-content">
                             <h3 class="h4 card-title">Advisor Sketchbook</h3>
-
-                            <time class="publish-date" datetime="2022-04">Oct 2023 - Sept 2025</time>
+                            <p class="publish-date">Oct 2023 – Sep 2025</p>
                         </div>
-
                     </a>
                 </li>
+
                 <li>
-                    <a class="project-card" href="#">
-
+                    <a class="project-card" href="https://www.softpak.com/solutions/managed-accounts-rebalancing-system/" rel="noopener noreferrer" target="_blank">
                         <figure class="card-banner">
-                            <img alt="A macintosh on a yellow background." class="w-100"
-                                 src="./assets/images/project-2.png">
-                        </figure>
-
-                        <div class="card-content">
-                            <h3 class="h4 card-title">Lorem Ipsum Dolor 01</h3>
-
-                            <time class="publish-date" datetime="2022-04">April 2021</time>
-                        </div>
-
-                    </a>
-                </li>
-                <li>
-                    <a class="project-card" href="https://www.softpak.com/solutions/managed-accounts/" target="_blank">
-
-                        <figure class="card-banner">
-                            <img alt="MARS(Managed Accounts Rebalancing Systems)" class="w-100"
+                            <img alt="MARS (Managed Accounts Rebalancing System)" class="w-100" decoding="async" loading="lazy"
                                  src="./assets/images/project-3.png">
                         </figure>
-
                         <div class="card-content">
-                            <h3 class="h4 card-title">
-                                MARS
-                            </h3>
-                            <time class="publish-date">Jun 2022 - Nov 2023</time>
+                            <h3 class="h4 card-title">MARS</h3>
+                            <p class="publish-date">Jun 2022 – Nov 2023</p>
                         </div>
-
                     </a>
                 </li>
 
                 <li>
-                    <a class="project-card" href="#">
-
+                    <a class="project-card" href="https://doi.org/10.21203/rs.3.rs-10346557/v1" rel="noopener noreferrer" target="_blank">
                         <figure class="card-banner">
-                            <img alt="Blue digital watch on a dark liver background." class="w-100"
-                                 src="./assets/images/project-4.png">
+                            <img alt="AI-Augmented Agile MVP Development research" class="w-100" decoding="async" loading="lazy"
+                                 src="./assets/images/project-research.svg">
                         </figure>
-
                         <div class="card-content">
-                            <h3 class="h4 card-title">Lorem Ipsum Dolor 02</h3>
-
-                            <time class="publish-date" datetime="2022-04">June 2025</time>
+                            <h3 class="h4 card-title">AI-Augmented Agile MVP Development (research)</h3>
+                            <p class="publish-date">2026</p>
                         </div>
-
                     </a>
                 </li>
 
                 <li>
-                    <a class="project-card" href="#">
-
+                    <a class="project-card" href="https://github.com/muhammadowaismushtaq/brain-tumor-detector" rel="noopener noreferrer" target="_blank">
                         <figure class="card-banner">
-                            <img alt="On a dark liver background, Airport luggage car carrying a luggage." class="w-100"
-                                 src="./assets/images/project-5.png">
+                            <img alt="Brain Tumor Detection" class="w-100" decoding="async" loading="lazy"
+                                 src="./assets/images/project-brain-tumor.svg">
                         </figure>
-
                         <div class="card-content">
-                            <h3 class="h4 card-title">Lorem Ipsum Dolor 03</h3>
-
-                            <time class="publish-date" datetime="2022-04">June 2025</time>
+                            <h3 class="h4 card-title">Brain Tumor Detection (VGG-16, 97.95% accuracy)</h3>
+                            <p class="publish-date">Dec 2021</p>
                         </div>
-
                     </a>
-                </li>
-
-                <li>
-                    <a class="project-card" href="#">
-
-                        <figure class="card-banner">
-                            <img alt="On a yellow background, a digital watch and a glass." class="w-100"
-                                 src="./assets/images/project-6.png">
-                        </figure>
-
-                        <div class="card-content">
-                            <h3 class="h4 card-title">Lorem Ipsum Dolor 04</h3>
-
-                            <time class="publish-date" datetime="2022-04">June 2025</time>
-                        </div>
-
-                    </a>
-                </li>
-
-                <li>
-                    <a class="project-card" href="#">
-
-                        <figure class="card-banner">
-                            <img alt="A fujifilm instant camera on a dark electric blue background." class="w-100"
-                                 src="./assets/images/project-7.png">
-                        </figure>
-
-                        <div class="card-content">
-                            <h3 class="h4 card-title">Lorem Ipsum Dolor 05</h3>
-
-                            <time class="publish-date" datetime="2022-04">June 2025</time>
-                        </div>
-
-                    </a>
-                </li>
-
-                <li>
-                    <button class="load-more">Load more work</button>
                 </li>
 
             </ul>
@@ -602,37 +606,6 @@
                     <li class="contact-list-item">
 
                         <div class="contact-item-icon">
-                            <ion-icon name="location-outline"></ion-icon>
-                        </div>
-
-                        <div class="wrapper">
-                            <h3 class="h4 contact-item-title">Address:</h3>
-
-                            <address class="contact-info">
-                                Gulshan-e-Maymar, Karachi, Pakistan
-                            </address>
-                        </div>
-
-                    </li>
-
-                    <li class="contact-list-item">
-
-                        <div class="contact-item-icon">
-                            <ion-icon name="call-outline"></ion-icon>
-                        </div>
-
-                        <div class="wrapper">
-                            <h3 class="h4 contact-item-title">Phone:</h3>
-
-                            <a class="contact-info" href="tel:+923400000809">(+92) 340 0000 809</a>
-
-                        </div>
-
-                    </li>
-
-                    <li class="contact-list-item">
-
-                        <div class="contact-item-icon">
                             <ion-icon name="mail-outline"></ion-icon>
                         </div>
 
@@ -644,7 +617,7 @@
                     <li>
                         <ul class="contac-social-list">
                             <li>
-                                <a class="contact-social-link" href="https://www.linkedin.com/in/muhammadowaismushtaq/" target="_blank">
+                                <a class="contact-social-link" href="https://www.linkedin.com/in/muhammadowaismushtaq/" target="_blank" rel="noopener noreferrer">
                                     <div class="tooltip">Linkedin</div>
 
                                     <ion-icon name="logo-linkedin"></ion-icon>
@@ -652,7 +625,7 @@
                             </li>
 
                             <li>
-                                <a class="contact-social-link" href="https://github.com/muhammadowaismushtaq" target="_blank">
+                                <a class="contact-social-link" href="https://github.com/muhammadowaismushtaq" target="_blank" rel="noopener noreferrer">
                                     <div class="tooltip">GitHub</div>
 
                                     <ion-icon name="logo-github"></ion-icon>
@@ -665,13 +638,13 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="contact-social-link" href="https://www.facebook.com/muhammadowaismushtaq/" target="_blank">
+                                <a class="contact-social-link" href="https://www.facebook.com/muhammadowaismushtaq/" target="_blank" rel="noopener noreferrer">
                                     <div class="tooltip">Facebook</div>
                                     <ion-icon name="logo-facebook"></ion-icon>
                                 </a>
                             </li>
                             <li>
-                                <a class="contact-social-link" href="https://x.com/m_owaismushtaq" target="_blank">
+                                <a class="contact-social-link" href="https://x.com/m_owaismushtaq" target="_blank" rel="noopener noreferrer">
                                     <div class="tooltip">Twitter</div>
 
                                     <ion-icon name="logo-twitter"></ion-icon>
@@ -747,6 +720,10 @@
 
                 </div>
 
+                <!-- Spam honeypot: hidden from people, bots fill it in, and Formspree drops those submissions. -->
+                <input aria-hidden="true" autocomplete="off" class="form-honeypot" name="_gotcha" tabindex="-1"
+                       type="text">
+
                 <button class="btn btn-primary" type="submit">Send</button>
 
             </form>
@@ -770,7 +747,8 @@
         </p>
 
         <p class="copyright">
-            &copy; 2025 <a href="#">muhammadowaismushtaq</a>. All rights reserved
+            <!-- The year is a static fallback; script.js replaces it with the current year. -->
+            &copy; <span data-current-year>2026</span> <a href="#">muhammadowaismushtaq</a>. All rights reserved
         </p>
 
     </div>
@@ -780,8 +758,13 @@
 <div id="myModal" class="modal">
     <div class="modal-content">
         <span class="close" id="closeModal">&times;</span>
-        <!-- The other static site or page you want to show -->
-        <iframe src="https://muhammadowaismushtaq.github.io/portfolio-whatsapp/" title="Other Site"></iframe>
+        <!--
+          The chat page is only loaded when the modal is first opened (script.js copies data-src
+          into src), so it no longer delays the page load or the preloader.
+        -->
+        <iframe data-src="https://muhammadowaismushtaq.github.io/portfolio-whatsapp/"
+                id="chatModalFrame" referrerpolicy="strict-origin-when-cross-origin"
+                title="Chat with Owais on WhatsApp"></iframe>
     </div>
 </div>
 
@@ -791,7 +774,10 @@
 
 <script src="./assets/js/script.js"></script>
 <!-- Ionicons for modern browsers -->
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<!-- Pinned version + Subresource Integrity: the browser refuses the file if its contents ever change. -->
+<script crossorigin="anonymous"
+        integrity="sha384-EcogLzNzScolFpuLPk/kxJRnmu39K6J1j3+8yrfrebDq7qtbZoB2gfP0rD08JKit"
+        src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js" type="module"></script>
 
 </body>
 </html>

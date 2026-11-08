@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="uRebal">
+  <rect width="800" height="600" fill="#303030"/>
+  <rect x="0" y="560" width="800" height="40" fill="#E07B45"/>
+  <g fill="none" stroke="#E07B45" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"><rect x="250" y="110" width="120" height="180" rx="12"/><rect x="430" y="110" width="120" height="180" rx="12"/><path d="M372 200h56m-14-14 14 14-14 14"/><path d="M280 150h60M280 190h60M280 230h40M460 150h60M460 190h60M460 230h40"/></g>
+  <text x="400" y="430" fill="#FFFFFF" font-family="Poppins, Arial, sans-serif" font-size="54" font-weight="700" text-anchor="middle">uRebal</text>
+  <text x="400" y="485" fill="#9E9E9E" font-family="Roboto, Arial, sans-serif" font-size="28" text-anchor="middle">Backend modernization</text>
+</svg>

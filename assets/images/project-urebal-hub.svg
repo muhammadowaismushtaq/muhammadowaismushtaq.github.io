@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="uRebal Hub">
+  <rect width="800" height="600" fill="#303030"/>
+  <rect x="0" y="560" width="800" height="40" fill="#E07B45"/>
+  <g fill="none" stroke="#E07B45" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"><circle cx="400" cy="200" r="42"/><circle cx="270" cy="120" r="26"/><circle cx="530" cy="120" r="26"/><circle cx="270" cy="285" r="26"/><circle cx="530" cy="285" r="26"/><path d="M366 176 292 135M434 176l74-41M366 224l-74 44M434 224l74 44"/></g>
+  <text x="400" y="430" fill="#FFFFFF" font-family="Poppins, Arial, sans-serif" font-size="54" font-weight="700" text-anchor="middle">uRebal Hub</text>
+  <text x="400" y="485" fill="#9E9E9E" font-family="Roboto, Arial, sans-serif" font-size="28" text-anchor="middle">Wealth-management FinTech</text>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Brain Tumor Detection">
+  <rect width="800" height="600" fill="#303030"/>
+  <rect x="0" y="560" width="800" height="40" fill="#E07B45"/>
+  <g fill="none" stroke="#E07B45" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"><path d="M400 110c-30-30-90-20-100 25-40 5-55 55-30 85-20 35 10 80 50 75 15 30 60 35 80 10z"/><path d="M400 110c30-30 90-20 100 25 40 5 55 55 30 85 20 35-10 80-50 75-15 30-60 35-80 10z"/><path d="M400 110v195"/></g>
+  <text x="400" y="430" fill="#FFFFFF" font-family="Poppins, Arial, sans-serif" font-size="54" font-weight="700" text-anchor="middle">Brain Tumor Detection</text>
+  <text x="400" y="485" fill="#9E9E9E" font-family="Roboto, Arial, sans-serif" font-size="28" text-anchor="middle">VGG-16 · 97.95% accuracy</text>
+</svg>
