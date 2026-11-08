@@ -1,187 +1,386 @@
+/**
+ * ========================================
+ * Main JavaScript File - Portfolio Website
+ * ========================================
+ *
+ * This file contains all client-side functionality for the portfolio website including:
+ * - Header and navigation management (sticky header, mobile menu toggle)
+ * - Theme switching (dark/light mode) with localStorage persistence
+ * - Skills section toggle functionality for switching between skill categories
+ * - WhatsApp chat modal handling (the chat page is only loaded on first open)
+ * - Preloader ("bird" animation) that closes as soon as the page's required assets are loaded
+ * - Dynamic copyright year in the footer
+ *
+ * The script is loaded at the end of <body>, so every element it looks up already exists.
+ * It never writes HTML strings into the page (no innerHTML), only classes, text and attributes.
+ *
+ * ========================================
+ */
+
 'use strict';
 
-/**
- * element toggle function
- */
+/* ----------------------------------------
+ * Constants
+ * ---------------------------------------- */
 
-const elemToggleFunc = function (elem) {
-    elem.classList.toggle("active");
+/** CSS class used throughout the site to mark an element as open / active. */
+const ACTIVE_CLASS = "active";
+
+/** localStorage key under which the chosen color theme is saved. */
+const THEME_STORAGE_KEY = "theme";
+
+/** Body class for the dark color theme (the default). */
+const DARK_THEME_CLASS = "dark_theme";
+
+/** Body class for the light color theme. */
+const LIGHT_THEME_CLASS = "light_theme";
+
+/** Scroll distance (px) after which the header becomes sticky and the go-to-top button appears. */
+const STICKY_HEADER_SCROLL_OFFSET = 10;
+
+/**
+ * Shortest time (ms since navigation start) the preloader stays on screen. It only prevents a
+ * one-frame flash on very fast (cached) loads; on a normal load the page takes longer than this
+ * anyway, so no extra waiting is added.
+ */
+const PRELOADER_MIN_VISIBLE_MS = 300;
+
+/**
+ * Longest time (ms since navigation start) the preloader may stay on screen. If a resource hangs
+ * (slow third-party image host, blocked font), the page is revealed anyway.
+ */
+const PRELOADER_MAX_VISIBLE_MS = 6000;
+
+/**
+ * How long to wait for the CSS fade-out (0.45s in style.css) to finish before removing the
+ * preloader from the DOM regardless, in case the transitionend event never fires.
+ */
+const PRELOADER_FADE_FALLBACK_MS = 700;
+
+/* ----------------------------------------
+ * Element references
+ * ---------------------------------------- */
+
+const headerElement = document.querySelector("[data-header]");
+const goToTopButton = document.querySelector("[data-go-top]");
+const navbarToggleButton = document.querySelector("[data-nav-toggle-btn]");
+const navbarElement = document.querySelector("[data-navbar]");
+const navbarLinks = document.querySelectorAll(".navbar-link");
+const skillsToggleContainer = document.querySelector("[data-toggle-box]");
+const skillsToggleButtons = document.querySelectorAll("[data-toggle-btn]");
+const skillsContentBox = document.querySelector("[data-skills-box]");
+const themeToggleButton = document.querySelector("[data-theme-btn]");
+
+/* ----------------------------------------
+ * Generic helpers
+ * ---------------------------------------- */
+
+/**
+ * Toggles the shared "active" class on an element.
+ *
+ * @param {Element} targetElement - The element whose active state should be flipped.
+ * @returns {void}
+ */
+function toggleActiveClass(targetElement) {
+    targetElement.classList.toggle(ACTIVE_CLASS);
 }
 
+/**
+ * Returns a promise that resolves after the given delay. Negative delays resolve immediately.
+ *
+ * @param {number} delayInMilliseconds - How long to wait.
+ * @returns {Promise<void>} Resolves once the delay has passed.
+ */
+function waitFor(delayInMilliseconds) {
+    return new Promise((resolve) => setTimeout(resolve, Math.max(0, delayInMilliseconds)));
+}
+
+/* ----------------------------------------
+ * Header & navigation
+ * ---------------------------------------- */
 
 /**
- * header sticky & go to top
+ * Makes the header sticky and shows the go-to-top button once the user has scrolled past
+ * {@link STICKY_HEADER_SCROLL_OFFSET}; reverts both when back at the top.
+ *
+ * @returns {void}
  */
+function updateHeaderOnScroll() {
+    const hasScrolledDown = window.scrollY >= STICKY_HEADER_SCROLL_OFFSET;
+    headerElement.classList.toggle(ACTIVE_CLASS, hasScrolledDown);
+    goToTopButton.classList.toggle(ACTIVE_CLASS, hasScrolledDown);
+}
 
-const header = document.querySelector("[data-header]");
-const goTopBtn = document.querySelector("[data-go-top]");
+/**
+ * Opens or closes the mobile navigation menu. The body also gets the active class so the CSS
+ * can stop the page from scrolling behind the open menu.
+ *
+ * @returns {void}
+ */
+function toggleMobileNavigation() {
+    toggleActiveClass(navbarToggleButton);
+    toggleActiveClass(navbarElement);
+    toggleActiveClass(document.body);
+}
 
-window.addEventListener("scroll", function () {
+/**
+ * Closes the mobile navigation menu (used after a menu link is chosen).
+ *
+ * @returns {void}
+ */
+function closeMobileNavigation() {
+    navbarElement.classList.remove(ACTIVE_CLASS);
+    navbarToggleButton.classList.remove(ACTIVE_CLASS);
+    document.body.classList.remove(ACTIVE_CLASS);
+}
 
-    if (window.scrollY >= 10) {
-        header.classList.add("active");
-        goTopBtn.classList.add("active");
-    } else {
-        header.classList.remove("active");
-        goTopBtn.classList.remove("active");
+/* ----------------------------------------
+ * Skills section
+ * ---------------------------------------- */
+
+/**
+ * Switches the skills section between the "Tech" and "Tools" lists by flipping the active state
+ * of the toggle container, both toggle buttons and the skills content box.
+ *
+ * @returns {void}
+ */
+function switchSkillsCategory() {
+    toggleActiveClass(skillsToggleContainer);
+    skillsToggleButtons.forEach(toggleActiveClass);
+    toggleActiveClass(skillsContentBox);
+}
+
+/* ----------------------------------------
+ * Theme (dark / light)
+ * ---------------------------------------- */
+
+/**
+ * Reads the saved theme from localStorage. Storage can be unavailable (privacy modes, blocked
+ * cookies) and then throws, so failures fall back to "no saved theme".
+ *
+ * @returns {string|null} The saved theme class name, or null if none is saved or storage is unavailable.
+ */
+function readSavedTheme() {
+    try {
+        return window.localStorage.getItem(THEME_STORAGE_KEY);
+    } catch (storageError) {
+        return null;
+    }
+}
+
+/**
+ * Saves the chosen theme to localStorage, silently ignoring storage that is unavailable.
+ *
+ * @param {string} themeClassName - {@link DARK_THEME_CLASS} or {@link LIGHT_THEME_CLASS}.
+ * @returns {void}
+ */
+function saveTheme(themeClassName) {
+    try {
+        window.localStorage.setItem(THEME_STORAGE_KEY, themeClassName);
+    } catch (storageError) {
+        // Theme still applies for this visit; it just won't be remembered.
+    }
+}
+
+/**
+ * Applies a color theme to the page and syncs the theme button's active state with it
+ * (active = light theme).
+ *
+ * @param {string} themeClassName - {@link DARK_THEME_CLASS} or {@link LIGHT_THEME_CLASS}.
+ * @returns {void}
+ */
+function applyTheme(themeClassName) {
+    const isLightTheme = themeClassName === LIGHT_THEME_CLASS;
+    document.body.classList.toggle(LIGHT_THEME_CLASS, isLightTheme);
+    document.body.classList.toggle(DARK_THEME_CLASS, !isLightTheme);
+    themeToggleButton.classList.toggle(ACTIVE_CLASS, isLightTheme);
+}
+
+/**
+ * Switches between the dark and light theme and remembers the choice for future visits.
+ *
+ * @returns {void}
+ */
+function toggleTheme() {
+    const isCurrentlyLight = document.body.classList.contains(LIGHT_THEME_CLASS);
+    const nextTheme = isCurrentlyLight ? DARK_THEME_CLASS : LIGHT_THEME_CLASS;
+    applyTheme(nextTheme);
+    saveTheme(nextTheme);
+}
+
+/**
+ * Restores the theme the visitor chose last time; defaults to the dark theme.
+ *
+ * @returns {void}
+ */
+function restoreSavedTheme() {
+    applyTheme(readSavedTheme() === LIGHT_THEME_CLASS ? LIGHT_THEME_CLASS : DARK_THEME_CLASS);
+}
+
+/* ----------------------------------------
+ * Footer copyright year
+ * ---------------------------------------- */
+
+/**
+ * Replaces the static fallback year in every [data-current-year] element with the current year,
+ * so the copyright notice never goes out of date.
+ *
+ * @returns {void}
+ */
+function showCurrentCopyrightYear() {
+    const currentYear = String(new Date().getFullYear());
+    document.querySelectorAll("[data-current-year]").forEach((yearElement) => {
+        yearElement.textContent = currentYear;
+    });
+}
+
+/* ----------------------------------------
+ * Preloader ("bird" loading animation)
+ * ---------------------------------------- */
+
+/**
+ * Resolves once the window "load" event has fired, i.e. the HTML, CSS, scripts and every
+ * non-lazy image have finished loading. Resolves immediately if that already happened.
+ *
+ * @returns {Promise<void>} Resolves when the page has fully loaded.
+ */
+function waitForPageLoad() {
+    if (document.readyState === "complete") {
+        return Promise.resolve();
+    }
+    return new Promise((resolve) => window.addEventListener("load", () => resolve(), {once: true}));
+}
+
+/**
+ * Resolves once the web fonts in use (Poppins, Roboto, Saira Stencil One) are ready, so the
+ * page is not revealed with fallback fonts that then visibly swap. Resolves immediately in
+ * browsers without the CSS Font Loading API, and never rejects.
+ *
+ * @returns {Promise<void>} Resolves when fonts are ready (or cannot be awaited).
+ */
+function waitForWebFonts() {
+    if (!document.fonts || !document.fonts.ready) {
+        return Promise.resolve();
+    }
+    return document.fonts.ready.then(() => undefined, () => undefined);
+}
+
+/**
+ * Fades the preloader out and then removes it from the DOM. Safe to call more than once.
+ *
+ * @param {HTMLElement} preloaderElement - The #preloader overlay element.
+ * @returns {void}
+ */
+function hidePreloader(preloaderElement) {
+    if (preloaderElement.classList.contains("preloader--hidden")) {
+        return;
     }
 
-});
+    /** Removes the preloader from the DOM if it is still attached. */
+    const removePreloader = () => preloaderElement.remove();
 
-
-/**
- * navbar toggle
- */
-
-const navToggleBtn = document.querySelector("[data-nav-toggle-btn]");
-const navbar = document.querySelector("[data-navbar]");
-
-navToggleBtn.addEventListener("click", function () {
-
-    elemToggleFunc(navToggleBtn);
-    elemToggleFunc(navbar);
-    elemToggleFunc(document.body);
-
-});
-
-
-/**
- * skills toggle
- */
-
-const toggleBtnBox = document.querySelector("[data-toggle-box]");
-const toggleBtns = document.querySelectorAll("[data-toggle-btn]");
-const skillsBox = document.querySelector("[data-skills-box]");
-
-for (let i = 0; i < toggleBtns.length; i++) {
-    toggleBtns[i].addEventListener("click", function () {
-
-        elemToggleFunc(toggleBtnBox);
-        for (let i = 0; i < toggleBtns.length; i++) {
-            elemToggleFunc(toggleBtns[i]);
+    preloaderElement.classList.add("preloader--hidden");
+    preloaderElement.addEventListener("transitionend", (transitionEvent) => {
+        if (transitionEvent.propertyName === "opacity") {
+            removePreloader();
         }
-        elemToggleFunc(skillsBox);
+    });
+    // Fallback in case transitionend never fires (e.g. transitions disabled).
+    setTimeout(removePreloader, PRELOADER_FADE_FALLBACK_MS);
+}
 
+/**
+ * Hides the preloader as soon as the page and its required assets (CSS, above-the-fold images,
+ * web fonts) are ready, instead of after a fixed delay. A short minimum avoids a flash on
+ * instant loads, and a maximum makes sure the loader can never get stuck.
+ *
+ * Both limits are measured from navigation start (performance.now()), so time already spent
+ * loading counts toward them.
+ *
+ * @returns {void}
+ */
+function initializePreloader() {
+    const preloaderElement = document.getElementById("preloader");
+    if (!preloaderElement) {
+        return;
+    }
+
+    const elapsedSinceNavigation = performance.now();
+    const pageIsReady = Promise.all([
+        waitForPageLoad(),
+        waitForWebFonts(),
+        waitFor(PRELOADER_MIN_VISIBLE_MS - elapsedSinceNavigation),
+    ]);
+    const safetyTimeout = waitFor(PRELOADER_MAX_VISIBLE_MS - elapsedSinceNavigation);
+
+    Promise.race([pageIsReady, safetyTimeout]).then(() => hidePreloader(preloaderElement));
+}
+
+/* ----------------------------------------
+ * WhatsApp chat modal
+ * ---------------------------------------- */
+
+/**
+ * Wires up the WhatsApp chat modal: every ".openModal" link opens it, and the close button or a
+ * click on the dark backdrop closes it. The embedded chat page is only loaded on first open
+ * (its URL lives in the iframe's data-src), so it does not slow down the initial page load.
+ *
+ * @returns {void}
+ */
+function initializeChatModal() {
+    const chatModal = document.getElementById("myModal");
+    const chatModalFrame = document.getElementById("chatModalFrame");
+    const chatModalCloseButton = document.getElementById("closeModal");
+    const chatModalOpenLinks = document.querySelectorAll(".openModal");
+
+    if (!chatModal || !chatModalCloseButton || chatModalOpenLinks.length === 0) {
+        return;
+    }
+
+    /**
+     * Shows the modal, loading the chat page into the iframe the first time.
+     *
+     * @param {MouseEvent} clickEvent - Click on one of the open links; its "#" navigation is cancelled.
+     * @returns {void}
+     */
+    const openChatModal = (clickEvent) => {
+        clickEvent.preventDefault();
+        if (chatModalFrame && !chatModalFrame.getAttribute("src") && chatModalFrame.dataset.src) {
+            chatModalFrame.setAttribute("src", chatModalFrame.dataset.src);
+        }
+        chatModal.style.display = "block";
+    };
+
+    /**
+     * Hides the modal.
+     *
+     * @returns {void}
+     */
+    const closeChatModal = () => {
+        chatModal.style.display = "none";
+    };
+
+    chatModalOpenLinks.forEach((openLink) => openLink.addEventListener("click", openChatModal));
+    chatModalCloseButton.addEventListener("click", closeChatModal);
+    window.addEventListener("click", (clickEvent) => {
+        // Only a click on the backdrop itself closes the modal, not clicks inside its content.
+        if (clickEvent.target === chatModal) {
+            closeChatModal();
+        }
     });
 }
 
+/* ----------------------------------------
+ * Start-up
+ * ---------------------------------------- */
 
-/**
- * dark & light theme toggle
- */
+initializePreloader();
+restoreSavedTheme();
+showCurrentCopyrightYear();
+initializeChatModal();
 
-const themeToggleBtn = document.querySelector("[data-theme-btn]");
-
-themeToggleBtn.addEventListener("click", function () {
-
-    elemToggleFunc(themeToggleBtn);
-
-    if (themeToggleBtn.classList.contains("active")) {
-        document.body.classList.remove("dark_theme");
-        document.body.classList.add("light_theme");
-
-        localStorage.setItem("theme", "light_theme");
-    } else {
-        document.body.classList.add("dark_theme");
-        document.body.classList.remove("light_theme");
-
-        localStorage.setItem("theme", "dark_theme");
-    }
-
-});
-
-/**
- * check & apply last time selected theme from localStorage
- */
-
-if (localStorage.getItem("theme") === "light_theme") {
-    themeToggleBtn.classList.add("active");
-    document.body.classList.remove("dark_theme");
-    document.body.classList.add("light_theme");
-} else {
-    themeToggleBtn.classList.remove("active");
-    document.body.classList.remove("light_theme");
-    document.body.classList.add("dark_theme");
-}
-
-/**
- * close navbar when any nav link is clicked (mobile UX)
- */
-const navLinks = document.querySelectorAll(".navbar-link");
-
-navLinks.forEach(link => {
-    link.addEventListener("click", function () {
-        navbar.classList.remove("active");
-        navToggleBtn.classList.remove("active");
-        document.body.classList.remove("active");
-    });
-});
-
-/**
- * Easy selector helper function (Used in the existing file structure)
- */
-const select = (el, all = false) => {
-    el = el.trim();
-    if (all) {
-        return [...document.querySelectorAll(el)];
-    } else {
-        return document.querySelector(el);
-    }
-}
-
-/**
- * Preloader: fade out after short delay, then remove
- */
-let preloader = select('#preloader');
-
-if (preloader) {
-    window.addEventListener('load', () => {
-        // ⏳ Force loader to stay for at least 2 seconds
-        setTimeout(() => {
-            preloader.classList.add('preloader--hidden');
-
-            const onTransitionEnd = (e) => {
-                if (e.propertyName === 'opacity') {
-                    preloader.removeEventListener('transitionend', onTransitionEnd);
-                    if (preloader.parentNode) preloader.parentNode.removeChild(preloader);
-                }
-            };
-
-            preloader.addEventListener('transitionend', onTransitionEnd);
-
-            // Fallback removal
-            setTimeout(() => {
-                if (preloader.parentNode) preloader.parentNode.removeChild(preloader);
-            }, 1000);
-        }, 1500); // <-- duration before fade-out (in ms)
-    });
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-    const modal = document.getElementById("myModal");
-    const openModalButtons = document.querySelectorAll(".openModal"); // select by class
-    const closeModal = document.getElementById("closeModal");
-
-    // Ensure elements exist
-    if (modal && closeModal && openModalButtons.length > 0) {
-        // Attach click listener to each trigger
-        openModalButtons.forEach((btn) => {
-            btn.addEventListener("click", (e) => {
-                e.preventDefault();
-                modal.style.display = "block";
-            });
-        });
-
-        // Close when clicking X
-        closeModal.addEventListener("click", () => {
-            modal.style.display = "none";
-        });
-
-        // Close when clicking outside the modal content
-        window.addEventListener("click", (event) => {
-            if (event.target === modal) {
-                modal.style.display = "none";
-            }
-        });
-    }
-});
+window.addEventListener("scroll", updateHeaderOnScroll, {passive: true});
+navbarToggleButton.addEventListener("click", toggleMobileNavigation);
+navbarLinks.forEach((navbarLink) => navbarLink.addEventListener("click", closeMobileNavigation));
+skillsToggleButtons.forEach((toggleButton) => toggleButton.addEventListener("click", switchSkillsCategory));
+themeToggleButton.addEventListener("click", toggleTheme);

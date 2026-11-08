@@ -607,6 +607,73 @@ main {
 
 
 /*-----------------------------------*\
+ * #EDUCATION
+\*-----------------------------------*/
+
+.education {
+    padding-block: var(--section-padding);
+}
+
+.education-list {
+    display: grid;
+    gap: 20px;
+}
+
+.education-card {
+    background: var(--bg-secondary);
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 25px;
+    border-radius: var(--radius-12);
+    box-shadow: var(--shadow-1);
+}
+
+.education-card .card-icon {
+    flex-shrink: 0;
+    background: var(--raw-seinna);
+    color: var(--white);
+    width: 50px;
+    height: 50px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    font-size: 24px;
+    margin: 0;
+}
+
+.education-details {
+    flex-grow: 1;
+    margin: 0;
+}
+
+.education-title {
+    margin-bottom: 6px;
+}
+
+.education-meta {
+    color: var(--raw-seinna);
+    font-size: var(--fs-6);
+    margin-bottom: 8px;
+}
+
+.education-text {
+    color: var(--color-secondary);
+    line-height: 1.6;
+}
+
+.education-link {
+    color: var(--color-primary);
+    text-decoration: underline;
+    transition: var(--transition-1);
+}
+
+.education-link:is(:hover, :focus) {
+    color: var(--raw-seinna);
+}
+
+
+/*-----------------------------------*\
  * #SKILLS
 \*-----------------------------------*/
 
@@ -752,6 +819,7 @@ main {
     background: var(--bg-primary);
     padding: 6px 12px;
     width: max-content;
+    max-width: 100%; /* long titles wrap instead of being clipped by the card */
     box-shadow: var(--shadow-1);
     transform: translateY(20px);
     opacity: 0;
@@ -771,13 +839,6 @@ main {
 
 .project-card:is(:hover, :focus) .publish-date {
     transition-delay: 0.1s;
-}
-
-.load-more {
-    font-size: var(--fs-4);
-    color: var(--raw-seinna);
-    text-decoration: underline;
-    margin-inline: auto;
 }
 
 
@@ -939,6 +1000,11 @@ textarea.input-field {
     line-height: 1.6;
 }
 
+/* The global reset makes spans and links block-level; keep the copyright on one line. */
+.copyright span {
+    display: inline;
+}
+
 .copyright a {
     display: inline-block;
     color: var(--raw-seinna);
@@ -1057,6 +1123,15 @@ textarea.input-field {
     border-radius: 10px;
 }
 
+/* Contact form spam honeypot: kept out of view and out of the layout. */
+.form-honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
 .close {
     position: absolute;
     top: 10px;
@@ -1126,6 +1201,14 @@ textarea.input-field {
      * STATS
      */
     .stats-list {
+        grid-template-columns: 1fr 1fr;
+    }
+
+
+    /**
+     * EDUCATION
+     */
+    .education-list {
         grid-template-columns: 1fr 1fr;
     }
 
@@ -1240,7 +1323,8 @@ textarea.input-field {
 
     .navbar-link {
         transform: translateY(0);
-        font-size: unset;
+        /* sized so all six menu items fit beside the logo and actions (larger again from 1200px) */
+        font-size: 1.25rem;
         padding-inline: 5px;
     }
 
@@ -1474,6 +1558,14 @@ textarea.input-field {
 
     .section-title {
         max-width: 460px;
+    }
+
+
+    /**
+     * HEADER
+     */
+    .navbar-link {
+        font-size: 1.75rem;
     }
 
 
