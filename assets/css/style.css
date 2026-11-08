@@ -323,15 +323,15 @@ body.active {
     z-index: 2;
 }
 
-.logo a {
-    color: var(--color-primary);
-    font-family: var(--ff-saira-stencil-one);
+/* The logo and the header actions keep their natural width; the menu adapts instead (script.js). */
+.header .logo,
+.header .navbar-actions {
+    flex-shrink: 0;
 }
 
-.logo span {
-    display: inline-block;
+.logo a {
     color: var(--raw-seinna);
-    margin-left: 2px;
+    font-family: var(--ff-saira-stencil-one);
 }
 
 .navbar-actions {
@@ -690,7 +690,10 @@ main {
     position: relative;
     width: max-content;
     margin-inline: auto;
-    display: flex;
+    /* Two equal columns sized to the longer label, so the slider below always covers one button
+       exactly, whatever the language. */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     align-items: center;
     padding: 5px;
     border-radius: 100px;
@@ -702,9 +705,9 @@ main {
     content: "";
     position: absolute;
     top: 5px;
-    left: 5px;
+    inset-inline-start: 5px;
     bottom: 5px;
-    width: 93px;
+    width: calc(50% - 5px);
     background: var(--raw-seinna);
     border-radius: 100px;
     transition: var(--transition-1);
@@ -712,8 +715,7 @@ main {
 }
 
 .skills-toggle.active::before {
-    left: 98px;
-    width: 94px;
+    inset-inline-start: 50%;
 }
 
 .toggle-btn {
@@ -1348,6 +1350,12 @@ span[data-i18n] {
 
     .navbar-link::before {
         height: 2px;
+    }
+
+    /* Set by script.js when the menu does not fit in one row even at its smallest font size. */
+    .navbar-list.navbar-list--wrapped {
+        flex-wrap: wrap;
+        row-gap: 4px;
     }
 
 

@@ -54,7 +54,7 @@ If you want to run this site locally (for development or testing), here’s how:
 
 ## 🌐 Languages
 
-The site is available in English, Spanish, French, German, Chinese, Arabic and Urdu. Visitors pick a language from the menu in the header; the choice is remembered, and a link such as `?lang=fr` opens the site directly in that language. Arabic and Urdu switch the page to right-to-left.
+The site is available in English, Spanish, French, German, Chinese, Japanese, Arabic and Urdu. Visitors pick a language from the menu in the header; the choice is remembered, and a link such as `?lang=fr` opens the site directly in that language. Arabic and Urdu switch the page to right-to-left.
 
 **How it works:** each piece of text in `index.html` has a key (`data-i18n="hero.title"`, or `data-i18n-attr="placeholder:contact.form.name"` for attributes). `assets/js/i18n.js` swaps in the text from `assets/i18n/<language>.json`. The English text in `index.html` is the fallback, so a missing translation simply shows in English.
 

@@ -28,7 +28,7 @@
 (function initializeTranslations() {
 
     /** Language codes that have a file in assets/i18n/. */
-    const SUPPORTED_LANGUAGES = ["en", "es", "fr", "de", "zh", "ar", "ur"];
+    const SUPPORTED_LANGUAGES = ["en", "es", "fr", "de", "zh", "ja", "ar", "ur"];
 
     /** Languages written right to left. */
     const RIGHT_TO_LEFT_LANGUAGES = new Set(["ar", "ur"]);
@@ -164,7 +164,9 @@
     }
 
     /**
-     * Returns a translation if it exists and is a non-empty string, otherwise the fallback.
+     * Returns a translation if the language file has the key, otherwise the fallback. An empty
+     * string is a valid translation: some languages need no text where English has some
+     * (e.g. Japanese has no word before the name in "I'm <name>").
      *
      * @param {Object<string, string>} translations - Translation text by key.
      * @param {string} translationKey - The key to look up.
@@ -173,7 +175,7 @@
      */
     function translateOrFallback(translations, translationKey, fallbackText) {
         const translatedText = translations[translationKey];
-        return typeof translatedText === "string" && translatedText !== "" ? translatedText : fallbackText;
+        return typeof translatedText === "string" ? translatedText : fallbackText;
     }
 
     /**
@@ -204,6 +206,9 @@
         if (languageMenu) {
             languageMenu.value = languageCode;
         }
+
+        // Lets script.js re-fit layout that depends on text length (e.g. the header menu).
+        document.dispatchEvent(new CustomEvent("pagelanguagechange", {detail: {languageCode}}));
     }
 
     /**
