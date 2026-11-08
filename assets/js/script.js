@@ -57,6 +57,21 @@ const PRELOADER_MAX_VISIBLE_MS = 6000;
  */
 const PRELOADER_FADE_FALLBACK_MS = 700;
 
+/** Media query for the desktop layout, where the menu sits in one row beside the logo. */
+const DESKTOP_NAVIGATION_MEDIA_QUERY = "(min-width: 992px)";
+
+/** Smallest font size (px) the desktop menu shrinks to before it wraps onto a second line. */
+const NAVIGATION_MIN_FONT_SIZE_PX = 14;
+
+/** Minimum clear space (px) kept between the desktop menu and the logo or header actions. */
+const NAVIGATION_MIN_GAP_PX = 16;
+
+/** How much (px) the desktop menu font shrinks per step while it does not fit. */
+const NAVIGATION_FONT_STEP_PX = 1;
+
+/** Class that lets the desktop menu wrap onto a second line when even the smallest font does not fit. */
+const NAVIGATION_WRAPPED_CLASS = "navbar-list--wrapped";
+
 /* ----------------------------------------
  * Element references
  * ---------------------------------------- */
@@ -66,6 +81,9 @@ const goToTopButton = document.querySelector("[data-go-top]");
 const navbarToggleButton = document.querySelector("[data-nav-toggle-btn]");
 const navbarElement = document.querySelector("[data-navbar]");
 const navbarLinks = document.querySelectorAll(".navbar-link");
+const navbarList = document.querySelector(".navbar-list");
+const headerLogo = document.querySelector(".header .logo");
+const headerActions = document.querySelector(".header .navbar-actions");
 const skillsToggleContainer = document.querySelector("[data-toggle-box]");
 const skillsToggleButtons = document.querySelectorAll("[data-toggle-btn]");
 const skillsContentBox = document.querySelector("[data-skills-box]");
@@ -132,6 +150,87 @@ function closeMobileNavigation() {
     navbarElement.classList.remove(ACTIVE_CLASS);
     navbarToggleButton.classList.remove(ACTIVE_CLASS);
     document.body.classList.remove(ACTIVE_CLASS);
+}
+
+/**
+ * Checks whether two on-screen boxes overlap horizontally.
+ *
+ * @param {DOMRect} firstBox - The first box.
+ * @param {DOMRect} secondBox - The second box.
+ * @returns {boolean} True if the boxes share any horizontal space.
+ */
+function boxesOverlapHorizontally(firstBox, secondBox) {
+    return firstBox.left < secondBox.right && secondBox.left < firstBox.right;
+}
+
+/**
+ * Returns a copy of a box widened by the given margin on both sides.
+ *
+ * @param {DOMRect} box - The original box.
+ * @param {number} marginInPixels - Space to add on the left and the right.
+ * @returns {{left: number, right: number}} The widened box.
+ */
+function widenBox(box, marginInPixels) {
+    return {left: box.left - marginInPixels, right: box.right + marginInPixels};
+}
+
+/**
+ * Checks whether the desktop menu comes closer than NAVIGATION_MIN_GAP_PX to the logo or the
+ * header actions (language menu and theme button), or runs outside the header.
+ *
+ * @returns {boolean} True if the menu does not fit in its row.
+ */
+function navigationOverflowsHeader() {
+    const linkBoxes = Array.from(navbarLinks, (navbarLink) => navbarLink.getBoundingClientRect());
+    const menuBox = {
+        left: Math.min(...linkBoxes.map((linkBox) => linkBox.left)),
+        right: Math.max(...linkBoxes.map((linkBox) => linkBox.right)),
+    };
+    const headerBox = headerElement.querySelector(".container").getBoundingClientRect();
+
+    return boxesOverlapHorizontally(menuBox, widenBox(headerLogo.getBoundingClientRect(), NAVIGATION_MIN_GAP_PX))
+        || boxesOverlapHorizontally(menuBox, widenBox(headerActions.getBoundingClientRect(), NAVIGATION_MIN_GAP_PX))
+        || menuBox.left < headerBox.left
+        || menuBox.right > headerBox.right;
+}
+
+/**
+ * Makes the desktop menu fit beside the logo whatever the language: longer words (e.g. Spanish,
+ * French, German) shrink the menu font step by step, and if even the smallest size does not fit,
+ * the menu wraps onto a second line. On smaller screens the menu is a full-screen overlay, so the
+ * stylesheet's own sizes are kept.
+ *
+ * @returns {void}
+ */
+function fitNavigationToHeader() {
+    if (!navbarList || !headerLogo || !headerActions || navbarLinks.length === 0) {
+        return;
+    }
+
+    // The links animate all their properties (0.75s); pause that while measuring, or each new
+    // font size would only take effect after the measurement.
+    navbarLinks.forEach((navbarLink) => {
+        navbarLink.style.transition = "none";
+        navbarLink.style.removeProperty("font-size");
+    });
+    navbarList.classList.remove(NAVIGATION_WRAPPED_CLASS);
+    requestAnimationFrame(() => navbarLinks.forEach((navbarLink) => navbarLink.style.removeProperty("transition")));
+
+    if (!window.matchMedia(DESKTOP_NAVIGATION_MEDIA_QUERY).matches) {
+        return;
+    }
+
+    let navigationFontSize = parseFloat(getComputedStyle(navbarLinks[0]).fontSize);
+    while (navigationOverflowsHeader() && navigationFontSize > NAVIGATION_MIN_FONT_SIZE_PX) {
+        navigationFontSize = Math.max(NAVIGATION_MIN_FONT_SIZE_PX, navigationFontSize - NAVIGATION_FONT_STEP_PX);
+        navbarLinks.forEach((navbarLink) => {
+            navbarLink.style.fontSize = `${navigationFontSize}px`;
+        });
+    }
+
+    if (navigationOverflowsHeader()) {
+        navbarList.classList.add(NAVIGATION_WRAPPED_CLASS);
+    }
 }
 
 /* ----------------------------------------
@@ -252,7 +351,7 @@ function waitForPageLoad() {
 }
 
 /**
- * Resolves once the web fonts in use (Poppins, Roboto, Saira Stencil One) are ready, so the
+ * Resolves once the web fonts in use (Poppins, Roboto, Russo One) are ready, so the
  * page is not revealed with fallback fonts that then visibly swap. Resolves immediately in
  * browsers without the CSS Font Loading API, and never rejects.
  *
@@ -291,7 +390,7 @@ function hidePreloader(preloaderElement) {
 
 /**
  * Hides the preloader as soon as the page and its required assets (CSS, above-the-fold images,
- * web fonts) are ready, instead of after a fixed delay. A short minimum avoids a flash on
+ * web fonts, the chosen language's text) are ready, instead of after a fixed delay. A short minimum avoids a flash on
  * instant loads, and a maximum makes sure the loader can never get stuck.
  *
  * Both limits are measured from navigation start (performance.now()), so time already spent
@@ -306,9 +405,12 @@ function initializePreloader() {
     }
 
     const elapsedSinceNavigation = performance.now();
+    // Set by i18n.js: resolves once the visitor's chosen language is shown.
+    const translationIsReady = window.pageTranslationReady || Promise.resolve();
     const pageIsReady = Promise.all([
         waitForPageLoad(),
         waitForWebFonts(),
+        translationIsReady,
         waitFor(PRELOADER_MIN_VISIBLE_MS - elapsedSinceNavigation),
     ]);
     const safetyTimeout = waitFor(PRELOADER_MAX_VISIBLE_MS - elapsedSinceNavigation);
@@ -378,6 +480,13 @@ initializePreloader();
 restoreSavedTheme();
 showCurrentCopyrightYear();
 initializeChatModal();
+
+fitNavigationToHeader();
+// Re-fit once web fonts are in (their widths differ from the fallback font), after every
+// language change, and when the window is resized.
+waitForWebFonts().then(fitNavigationToHeader);
+document.addEventListener("pagelanguagechange", fitNavigationToHeader);
+window.addEventListener("resize", fitNavigationToHeader, {passive: true});
 
 window.addEventListener("scroll", updateHeaderOnScroll, {passive: true});
 navbarToggleButton.addEventListener("click", toggleMobileNavigation);

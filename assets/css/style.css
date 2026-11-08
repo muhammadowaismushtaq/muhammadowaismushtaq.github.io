@@ -22,7 +22,7 @@
      * typography
      */
 
-    --ff-saira-stencil-one: "Saira Stencil One", sans-serif;
+    --ff-logo: "Russo One", sans-serif;
     --ff-poppins: 'Poppins', sans-serif;
     --ff-roboto: 'Roboto', sans-serif;
 
@@ -323,15 +323,17 @@ body.active {
     z-index: 2;
 }
 
-.logo a {
-    color: var(--color-primary);
-    font-family: var(--ff-saira-stencil-one);
+/* The logo and the header actions keep their natural width; the menu adapts instead (script.js). */
+.header .logo,
+.header .navbar-actions {
+    flex-shrink: 0;
 }
 
-.logo span {
-    display: inline-block;
+.logo a {
     color: var(--raw-seinna);
-    margin-left: 2px;
+    font-family: var(--ff-logo);
+    font-size: 2.25rem;
+    letter-spacing: 0.5px;
 }
 
 .navbar-actions {
@@ -365,7 +367,9 @@ body.active {
 
 .theme-btn .icon {
     position: relative;
-    left: 0;
+    /* Logical offset: slides toward the far end of the pill in both left-to-right and
+       right-to-left (Arabic, Urdu) pages. */
+    inset-inline-start: 0;
     width: 20px;
     height: 20px;
     border-radius: 50px;
@@ -374,7 +378,7 @@ body.active {
 }
 
 .theme-btn.active .icon {
-    left: 20px;
+    inset-inline-start: 20px;
     box-shadow: inset 20px -20px var(--sizzling-sunrise);
 }
 
@@ -663,6 +667,8 @@ main {
 }
 
 .education-link {
+    /* The global reset makes links block-level; keep this one inside its sentence. */
+    display: inline;
     color: var(--color-primary);
     text-decoration: underline;
     transition: var(--transition-1);
@@ -690,7 +696,10 @@ main {
     position: relative;
     width: max-content;
     margin-inline: auto;
-    display: flex;
+    /* Two equal columns sized to the longer label, so the slider below always covers one button
+       exactly, whatever the language. */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     align-items: center;
     padding: 5px;
     border-radius: 100px;
@@ -702,9 +711,9 @@ main {
     content: "";
     position: absolute;
     top: 5px;
-    left: 5px;
+    inset-inline-start: 5px;
     bottom: 5px;
-    width: 93px;
+    width: calc(50% - 5px);
     background: var(--raw-seinna);
     border-radius: 100px;
     transition: var(--transition-1);
@@ -712,8 +721,7 @@ main {
 }
 
 .skills-toggle.active::before {
-    left: 98px;
-    width: 94px;
+    inset-inline-start: 50%;
 }
 
 .toggle-btn {
@@ -1005,6 +1013,11 @@ textarea.input-field {
     display: inline;
 }
 
+/* Translated pieces of a sentence (see assets/js/i18n.js) must stay inline with the text around them. */
+span[data-i18n] {
+    display: inline;
+}
+
 .copyright a {
     display: inline-block;
     color: var(--raw-seinna);
@@ -1123,12 +1136,18 @@ textarea.input-field {
     border-radius: 10px;
 }
 
-/* Contact form spam honeypot: kept out of view and out of the layout. */
+/* Contact form spam honeypot, kept out of view and out of the layout. Clipped in place rather than moved off-screen: a far-left offset made right-to-left pages
+   (Arabic, Urdu) scroll sideways to reach it. */
 .form-honeypot {
     position: absolute;
-    left: -9999px;
     width: 1px;
     height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
     opacity: 0;
 }
 
@@ -1343,6 +1362,12 @@ textarea.input-field {
 
     .navbar-link::before {
         height: 2px;
+    }
+
+    /* Set by script.js when the menu does not fit in one row even at its smallest font size. */
+    .navbar-list.navbar-list--wrapped {
+        flex-wrap: wrap;
+        row-gap: 4px;
     }
 
 
