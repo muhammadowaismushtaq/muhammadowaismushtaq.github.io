@@ -330,10 +330,20 @@ body.active {
 }
 
 .logo a {
+    display: flex;
+    align-items: center;
+    gap: 0.25em;
     color: var(--raw-seinna);
     font-family: var(--ff-logo);
     font-size: 2.25rem;
     letter-spacing: 0.5px;
+}
+
+/* Chakor (chukar partridge) mark beside the name; sized with the text. */
+.logo-mark {
+    width: 1.15em;
+    height: 1.15em;
+    flex-shrink: 0;
 }
 
 .navbar-actions {

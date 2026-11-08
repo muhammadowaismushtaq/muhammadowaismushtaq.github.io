@@ -88,6 +88,7 @@ Each piece of text in `index.html` has a key: `data-i18n="hero.title"` for an el
 
 ## ✏️ Common updates
 
+- **Logo:** the chakor (chukar partridge, Pakistan's national bird) mark lives in `assets/images/logo-chakor.svg` and is shown beside the name in the header and footer; `favicon.svg` is a copy of it for the browser tab.
 - **Résumé:** replace `assets/resume/Resume - Muhammad Owais Mushtaq.pdf`, keeping the same file name so the download link keeps working.
 - **Portfolio card:** copy an existing `<li>` in the `#portfolio` section of `index.html`, change its link, image (in `assets/images/`), title and date, and add translation keys for the title and date.
 - **Skill icon:** add the icon to `assets/images/` and copy an existing `<li>` in the skills or tools list.
