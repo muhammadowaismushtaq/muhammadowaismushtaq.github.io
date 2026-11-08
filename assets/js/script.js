@@ -291,7 +291,7 @@ function hidePreloader(preloaderElement) {
 
 /**
  * Hides the preloader as soon as the page and its required assets (CSS, above-the-fold images,
- * web fonts) are ready, instead of after a fixed delay. A short minimum avoids a flash on
+ * web fonts, the chosen language's text) are ready, instead of after a fixed delay. A short minimum avoids a flash on
  * instant loads, and a maximum makes sure the loader can never get stuck.
  *
  * Both limits are measured from navigation start (performance.now()), so time already spent
@@ -306,9 +306,12 @@ function initializePreloader() {
     }
 
     const elapsedSinceNavigation = performance.now();
+    // Set by i18n.js: resolves once the visitor's chosen language is shown.
+    const translationIsReady = window.pageTranslationReady || Promise.resolve();
     const pageIsReady = Promise.all([
         waitForPageLoad(),
         waitForWebFonts(),
+        translationIsReady,
         waitFor(PRELOADER_MIN_VISIBLE_MS - elapsedSinceNavigation),
     ]);
     const safetyTimeout = waitFor(PRELOADER_MAX_VISIBLE_MS - elapsedSinceNavigation);

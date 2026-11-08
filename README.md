@@ -49,3 +49,17 @@ If you want to run this site locally (for development or testing), here’s how:
    git clone https://github.com/muhammadowaismushtaq/muhammadowaismushtaq.github.io.git
    ```
 2. Open `index.html` in a browser, or serve the folder with any static file server.
+
+---
+
+## 🌐 Languages
+
+The site is available in English, Spanish, French, German, Chinese, Arabic and Urdu. Visitors pick a language from the menu in the header; the choice is remembered, and a link such as `?lang=fr` opens the site directly in that language. Arabic and Urdu switch the page to right-to-left.
+
+**How it works:** each piece of text in `index.html` has a key (`data-i18n="hero.title"`, or `data-i18n-attr="placeholder:contact.form.name"` for attributes). `assets/js/i18n.js` swaps in the text from `assets/i18n/<language>.json`. The English text in `index.html` is the fallback, so a missing translation simply shows in English.
+
+**To change or add text:**
+1. Edit the text in `index.html` and give the element a `data-i18n` key.
+2. Add the same key to `assets/i18n/en.json` and to every other language file.
+
+**To add a language:** copy `assets/i18n/en.json` to `assets/i18n/<code>.json`, translate the values, add the code to `SUPPORTED_LANGUAGES` in `assets/js/i18n.js` (and to `RIGHT_TO_LEFT_LANGUAGES` for a right-to-left script), and add an `<option>` to the language menu in `index.html`.

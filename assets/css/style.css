@@ -1005,6 +1005,11 @@ textarea.input-field {
     display: inline;
 }
 
+/* Translated pieces of a sentence (see assets/js/i18n.js) must stay inline with the text around them. */
+span[data-i18n] {
+    display: inline;
+}
+
 .copyright a {
     display: inline-block;
     color: var(--raw-seinna);
