@@ -422,9 +422,28 @@ function initializePreloader() {
  * WhatsApp chat modal
  * ---------------------------------------- */
 
+/** Message sent to the chat page when the pop-up closes (the chat listens for this exact type). */
+const CHAT_CLOSED_MESSAGE = "chat-modal-closed";
+
 /**
- * Wires up the WhatsApp chat modal: every ".openModal" link opens it, and the close button or a
- * click on the dark backdrop closes it. The embedded chat page is only loaded on first open
+ * Posts a "pop-up closed" message to the embedded chat page. The message is addressed to the
+ * chat's own origin, so it can never be delivered to a different site.
+ *
+ * @param {HTMLIFrameElement|null} chatFrame - The chat iframe (may not be loaded yet).
+ * @returns {void}
+ */
+function notifyChatOfClose(chatFrame) {
+    const chatUrl = chatFrame && chatFrame.getAttribute("src");
+    if (!chatUrl || !chatFrame.contentWindow) {
+        return; // never opened, so there is nothing to reset
+    }
+    const chatOrigin = new URL(chatUrl, window.location.href).origin;
+    chatFrame.contentWindow.postMessage({type: CHAT_CLOSED_MESSAGE}, chatOrigin);
+}
+
+/**
+ * Wires up the WhatsApp chat modal: every ".openModal" link opens it, and the close button,
+ * the Escape key or a click on the dark backdrop closes it. The embedded chat page is only loaded on first open
  * (its URL lives in the iframe's data-src), so it does not slow down the initial page load.
  *
  * @returns {void}
@@ -454,16 +473,26 @@ function initializeChatModal() {
     };
 
     /**
-     * Hides the modal.
+     * Hides the modal and tells the chat page it was closed, so the chat can reset anything
+     * left open (such as its full-screen profile photo) before the next time it is shown.
      *
      * @returns {void}
      */
     const closeChatModal = () => {
+        if (chatModal.style.display === "none") {
+            return;
+        }
         chatModal.style.display = "none";
+        notifyChatOfClose(chatModalFrame);
     };
 
     chatModalOpenLinks.forEach((openLink) => openLink.addEventListener("click", openChatModal));
     chatModalCloseButton.addEventListener("click", closeChatModal);
+    document.addEventListener("keydown", (keyboardEvent) => {
+        if (keyboardEvent.key === "Escape") {
+            closeChatModal();
+        }
+    });
     window.addEventListener("click", (clickEvent) => {
         // Only a click on the backdrop itself closes the modal, not clicks inside its content.
         if (clickEvent.target === chatModal) {

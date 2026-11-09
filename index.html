@@ -12,7 +12,7 @@
       meta tag; GitHub Pages does not allow custom headers.)
     -->
     <meta http-equiv="Content-Security-Policy"
-          content="default-src 'self'; script-src 'self' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://unpkg.com; frame-src https://muhammadowaismushtaq.github.io; form-action https://formspree.io; base-uri 'self'; object-src 'none'">
+          content="default-src 'self'; script-src 'self' https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://unpkg.com; frame-src 'self' https://muhammadowaismushtaq.github.io; form-action https://formspree.io; base-uri 'self'; object-src 'none'">
 
     <title data-i18n="meta.title">Muhammad Owais Mushtaq | Senior Software Engineer & Tech Lead</title>
     <meta content="Muhammad Owais Mushtaq" name="author">
@@ -740,7 +740,8 @@
 <!-- Modal -->
 <div id="myModal" class="modal">
     <div class="modal-content">
-        <span class="close" id="closeModal">&times;</span>
+        <button aria-label="Close chat" class="close" data-i18n-attr="aria-label:modal.close" id="closeModal"
+                type="button">&times;</button>
         <!--
           The chat page is only loaded when the modal is first opened (script.js copies data-src
           into src), so it no longer delays the page load or the preloader.
