@@ -1161,13 +1161,47 @@ span[data-i18n] {
     opacity: 0;
 }
 
+/* Chat pop-up close button. It sits over the chat header (which leaves room for it), so it gets
+   its own dark circle to stay visible. Kept on the right in every language: the chat itself is
+   always left-to-right. */
 .close {
     position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 30px;
+    top: 8px;
+    right: 8px;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    margin: 0;
+    border-radius: 50%;
+    background: hsla(0, 0%, 0%, 0.35);
+    color: #e9edef;
+    font-size: 28px;
+    line-height: 1;
     cursor: pointer;
-    color: #333;
+    transition: background-color var(--transition-1);
+}
+
+.close:is(:hover, :focus-visible) {
+    background: hsla(0, 0%, 0%, 0.6);
+}
+
+/* Phones: the chat pop-up takes the whole screen, like opening a chat in WhatsApp. */
+@media (max-width: 767px) {
+
+    .modal-content {
+        width: 100%;
+        height: 100%;
+        height: 100dvh;
+        margin: 0;
+        border-radius: 0;
+    }
+
+    .modal-content iframe {
+        border-radius: 0;
+    }
+
 }
 
 /*-----------------------------------*\
