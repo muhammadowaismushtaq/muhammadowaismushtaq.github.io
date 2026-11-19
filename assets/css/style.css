@@ -1101,6 +1101,16 @@ span[data-i18n] {
     animation: pulse 1.6s ease-in-out infinite;
 }
 
+/* ===== Image loading percentage (under "Loading...") ===== */
+.preloader-progress {
+    min-height: 1.4em; /* reserve the line so nothing jumps when the number appears */
+    margin-top: 6px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.875rem;
+    color: #e5874a; /* chakor orange */
+    font-variant-numeric: tabular-nums; /* digits keep the same width as they count up */
+}
+
 /* ===== Text Pulse Animation ===== */
 @keyframes pulse {
     0%, 100% { opacity: 0.4; }

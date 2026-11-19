@@ -46,10 +46,11 @@ const STICKY_HEADER_SCROLL_OFFSET = 10;
 const PRELOADER_MIN_VISIBLE_MS = 300;
 
 /**
- * Longest time (ms since navigation start) the preloader may stay on screen. If a resource hangs
- * (slow third-party image host, blocked font), the page is revealed anyway.
+ * Longest time (ms since navigation start) the preloader may stay on screen. The preloader now
+ * waits for every image, so slow connections get more time; if a resource still hangs (slow
+ * third-party image host, blocked font), the page is revealed anyway.
  */
-const PRELOADER_MAX_VISIBLE_MS = 6000;
+const PRELOADER_MAX_VISIBLE_MS = 15000;
 
 /**
  * How long to wait for the CSS fade-out (0.45s in style.css) to finish before removing the
@@ -351,6 +352,71 @@ function waitForPageLoad() {
 }
 
 /**
+ * Resolves once one image has finished loading and decoding (or has failed). Never rejects, so
+ * a broken or blocked image can never keep the preloader on screen.
+ *
+ * @param {HTMLImageElement} image - The image to wait for.
+ * @returns {Promise<void>} Resolves when the image is ready to paint, or has failed.
+ */
+function waitForSingleImage(image) {
+    /** Decodes the image so it appears instantly when the preloader fades, without a blank frame. */
+    const decodeImage = () => (typeof image.decode === "function"
+        ? image.decode().then(() => undefined, () => undefined)
+        : Promise.resolve());
+
+    if (image.complete) {
+        return decodeImage();
+    }
+    return new Promise((resolve) => {
+        image.addEventListener("load", () => decodeImage().then(resolve), {once: true});
+        image.addEventListener("error", () => resolve(), {once: true});
+    });
+}
+
+/**
+ * Starts loading every image on the page, including the ones marked loading="lazy", and resolves
+ * once all of them have loaded (or failed). Lazy images would otherwise only start downloading
+ * when the visitor scrolls to them, so they would still be loading after the preloader closed.
+ *
+ * Images added to the page later, and CSS background images, are not included.
+ *
+ * @param {(loadedCount: number, totalCount: number) => void} [onProgress] - Called each time
+ *        another image finishes, for the progress percentage on the preloader.
+ * @returns {Promise<void>} Resolves when every image has loaded or failed.
+ */
+function waitForImages(onProgress = () => {}) {
+    const pageImages = Array.from(document.images);
+    let settledCount = 0;
+
+    pageImages.forEach((image) => {
+        if (image.loading === "lazy") {
+            image.loading = "eager"; // start the download now instead of on scroll
+        }
+    });
+
+    onProgress(settledCount, pageImages.length);
+    return Promise.all(pageImages.map((image) => waitForSingleImage(image).then(() => {
+        settledCount += 1;
+        onProgress(settledCount, pageImages.length);
+    }))).then(() => undefined);
+}
+
+/**
+ * Shows how many of the page's images have loaded, as a percentage under "Loading…".
+ *
+ * @param {HTMLElement|null} progressElement - The [data-preloader-progress] element, if present.
+ * @param {number} loadedCount - Images finished so far.
+ * @param {number} totalCount - Total number of images being waited for.
+ * @returns {void}
+ */
+function showImageLoadingProgress(progressElement, loadedCount, totalCount) {
+    if (!progressElement || totalCount === 0) {
+        return;
+    }
+    progressElement.textContent = `${Math.round((loadedCount / totalCount) * 100)}%`;
+}
+
+/**
  * Resolves once the web fonts in use (Poppins, Roboto, Righteous) are ready, so the
  * page is not revealed with fallback fonts that then visibly swap. Resolves immediately in
  * browsers without the CSS Font Loading API, and never rejects.
@@ -389,9 +455,10 @@ function hidePreloader(preloaderElement) {
 }
 
 /**
- * Hides the preloader as soon as the page and its required assets (CSS, above-the-fold images,
- * web fonts, the chosen language's text) are ready, instead of after a fixed delay. A short minimum avoids a flash on
- * instant loads, and a maximum makes sure the loader can never get stuck.
+ * Hides the preloader once the page is fully ready: CSS, every image (lazy ones included, so
+ * nothing is still loading when the page appears), web fonts and the chosen language's text.
+ * A short minimum avoids a flash on instant loads, and a maximum makes sure the loader can never
+ * get stuck on a slow connection or a resource that never arrives.
  *
  * Both limits are measured from navigation start (performance.now()), so time already spent
  * loading counts toward them.
@@ -404,11 +471,14 @@ function initializePreloader() {
         return;
     }
 
+    const progressElement = preloaderElement.querySelector("[data-preloader-progress]");
     const elapsedSinceNavigation = performance.now();
     // Set by i18n.js: resolves once the visitor's chosen language is shown.
     const translationIsReady = window.pageTranslationReady || Promise.resolve();
     const pageIsReady = Promise.all([
         waitForPageLoad(),
+        waitForImages((loadedCount, totalCount) =>
+            showImageLoadingProgress(progressElement, loadedCount, totalCount)),
         waitForWebFonts(),
         translationIsReady,
         waitFor(PRELOADER_MIN_VISIBLE_MS - elapsedSinceNavigation),
