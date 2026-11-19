@@ -34,9 +34,14 @@
       to   { transform: translateX(-10px); opacity: 0; }
     }
 
+    /* Reduced motion (Windows "Animation effects" off, common on office and remote-desktop PCs):
+       instead of freezing, which looks like the page is stuck, the chakor walks calmly. Only the
+       legs move, slowly; the bobbing, flapping, scrolling ground, dust and speed lines stop. */
     @media (prefers-reduced-motion: reduce) {
-      * { animation: none !important; }
+      .bird, .wing, .tail, .ground, .dust, .speed { animation: none; }
       .dust, .speed { opacity: 0; }
+      .leg-front, .leg-back { animation-duration: 1.2s; }
+      @keyframes stride { from { transform: rotate(-20deg); } to { transform: rotate(20deg); } }
     }
   </style>
 
